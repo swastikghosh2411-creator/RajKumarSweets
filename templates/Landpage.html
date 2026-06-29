@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rajkumar Sweets – Authentic Indian sweets crafted with traditional recipes. Order fresh sweets online." />
+  <title>Rajkumar Sweets – Authentic Indian Mithai</title>
+
+  <!-- Google Fonts: Cormorant Garamond (display) + Jost (body) -->
+   <link rel="stylesheet" href="../static/css/Landpage.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================
+       MINIMAL BASE STYLES — layout skeleton only.
+       All visual theming to be applied via external CSS later.
+  ============================================================ -->
+  <style>
+    /* ── CSS Variables: Red, Gold & Cream palette ── */
+    :root {
+      --clr-crimson:   #9B1C1C;
+      --clr-gold:      #C9943A;
+      --clr-gold-lt:   #E8C36A;
+      --clr-cream:     #FDF6EC;
+      --clr-cream-dk:  #F5E8D0;
+      --clr-dark:      #1A0A00;
+      --clr-muted:     #6B4C2A;
+
+      --ff-display:    'Cormorant Garamond', Georgia, serif;
+      --ff-body:       'Jost', sans-serif;
+
+      --radius-sm:     6px;
+      --radius-md:     12px;
+      --radius-lg:     24px;
+      --transition:    0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      background-color: var(--clr-cream);
+      color: var(--clr-dark);
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a  { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* Utility: visually hidden (accessibility) */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER / NAVIGATION
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner container">
+
+      <!-- Brand / Logo -->
+      <a href="#" class="site-header__brand" aria-label="Rajkumar Sweets – Home">
+        <img src="IMG" alt="Rajkumar Sweets logo" class="site-header__logo" width="56" height="56" />
+        <div class="site-header__brand-text">
+          <span class="site-header__name">Rajkumar Sweets</span>
+          <span class="site-header__tagline"> Authentic Mithai · Since 1978 </span>
+        </div>
+      </a>
+
+      <!-- Primary Navigation -->
+      <nav class="site-nav" aria-label="Primary navigation">
+        <button class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="Open navigation menu">
+          <span class="site-nav__toggle-bar"></span>
+          <span class="site-nav__toggle-bar"></span>
+          <span class="site-nav__toggle-bar"></span>
+        </button>
+
+        <ul class="site-nav__list" id="site-nav-menu" role="menubar">
+          <li class="site-nav__item" role="none">
+            <a href="#home"     class="site-nav__link site-nav__link--active" role="menuitem">Home</a>
+          </li>
+          <li class="site-nav__item" role="none">
+            <a href="#products" class="site-nav__link" role="menuitem">Products</a>
+          </li>
+          <li class="site-nav__item" role="none">
+            <a href="#contact"  class="site-nav__link" role="menuitem">Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Auth Buttons -->
+      <div class="site-header__auth">
+        <a href="#signin" class="btn btn--ghost btn--sm" aria-label="Sign in to your account">Sign In</a>
+        <a href="signup.html" class="btn btn--gold  btn--sm" aria-label="Create a new account">Sign Up</a>
+      </div>
+
+      <!-- Cart Icon -->
+      <a href="cart.html" class="site-header__cart" aria-label="View shopping cart (0 items)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="site-header__cart-count" aria-live="polite">0</span>
+      </a>
+
+    </div>
+  </header>
+  <!-- END: HEADER -->
+
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content">
+
+    <!-- ──────────────────────────────────────────────────────────
+         HERO / ABOUT SECTION
+    ────────────────────────────────────────────────────────── -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero__inner container">
+
+        <!-- Hero Content -->
+        <div class="hero__content">
+          <span class="hero__kicker">Handcrafted with Love Since 1978</span>
+
+          <h1 class="hero__heading" id="hero-heading">
+            India's Finest<br />
+            <em>Sweets, Delivered<br />to Your Door</em>
+          </h1>
+
+          <p class="hero__description">
+            At <strong>Rajkumar Sweets</strong>, we honour generations of tradition — every piece of 
+            mithai is prepared fresh daily using time-honoured recipes, pure ingredients, and the 
+            kind of craftsmanship that only decades of mastery can produce. Celebrate every moment 
+            with the richness of authentic Indian sweets, now conveniently available to order online.
+          </p>
+
+          <ul class="hero__trust-badges">
+            <li class="hero__badge">
+              <span class="hero__badge-icon" aria-hidden="true">🥛</span>
+              <span>Pure Dairy Ingredients</span>
+            </li>
+            <li class="hero__badge">
+              <span class="hero__badge-icon" aria-hidden="true">🍯</span>
+              <span>Traditional Recipes</span>
+            </li>
+            <li class="hero__badge">
+              <span class="hero__badge-icon" aria-hidden="true">🚚</span>
+              <span>Same-Day Delivery</span>
+            </li>
+          </ul>
+
+          <div class="hero__cta-group">
+            <a href="#products" class="btn btn--crimson btn--lg" aria-label="Order sweets now">
+              Explore Sweets
+            </a>
+          
+          </div>
+        </div>
+        <!-- END: Hero Content -->
+
+        <!-- Hero Image -->
+        <figure class="hero__image-wrapper" aria-label="Assorted Indian sweets on a decorative platter">
+          <img src="../static/images/kajukatli.png" alt="A beautifully arranged platter of assorted Indian sweets including Kaju Katli, Gulab Jamun, and Laddu" class="hero__image" width="620" height="560" loading="eager" />
+          <figcaption class="hero__image-caption sr-only">Rajkumar Sweets signature platter</figcaption>
+        </figure>
+        <!-- END: Hero Image -->
+
+      </div>
+    </section>
+    <!-- END: HERO / ABOUT -->
+
+
+    <!-- ──────────────────────────────────────────────────────────
+         PRODUCT LISTING SECTION
+    ────────────────────────────────────────────────────────── -->
+    <section class="products" id="products" aria-labelledby="products-heading">
+      <div class="products__inner container">
+
+        <!-- Section Header -->
+        <header class="section-header">
+          <span class="section-header__kicker">Freshly Made Every Day</span>
+          <h2 class="section-header__heading" id="products-heading">Our Sweet Collection</h2>
+          <p class="section-header__subtext">
+            From classic Bengali delicacies to festive gift hampers — discover the full range of 
+            handcrafted sweets prepared by our master <em>halwais</em>.
+          </p>
+        </header>
+        <!-- END: Section Header -->
+
+        <!-- Category Filter Tabs -->
+        <div class="products__filter" role="tablist" aria-label="Filter sweets by category">
+          <button class="products__filter-btn products__filter-btn--active"
+                  role="tab" aria-selected="true"  data-category="all"
+                  aria-controls="product-grid">
+            All
+          </button>
+          <button class="products__filter-btn"
+                  role="tab" aria-selected="false" data-category="bengali-sweets"
+                  aria-controls="product-grid">
+            Bengali Sweets
+          </button>
+          <button class="products__filter-btn"
+                  role="tab" aria-selected="false" data-category="dry-sweets"
+                  aria-controls="product-grid">
+            Dry Sweets
+          </button>
+          <button class="products__filter-btn"
+                  role="tab" aria-selected="false" data-category="gift-boxes"
+                  aria-controls="product-grid">
+            Gift Boxes
+          </button>
+          <button class="products__filter-btn"
+                  role="tab" aria-selected="false" data-category="festival-specials"
+                  aria-controls="product-grid">
+            Festival Specials
+          </button>
+        </div>
+        <!-- END: Category Filter -->
+
+        <!-- Product Grid -->
+        <div class="products__grid" id="product-grid" role="tabpanel" aria-label="Sweet products">
+
+          <!-- ── Product Card 1: Kaju Katli ── -->
+          <article class="product-card" data-category="dry-sweets" aria-label="Kaju Katli product">
+            <a href="#kaju-katli" class="product-card__image-link" tabindex="-1">
+              <figure class="product-card__image-wrapper">
+                <img src="../static/images/kajukatli.png" alt="Diamond-shaped Kaju Katli pieces dusted with silver vark on a gold plate" class="product-card__image" width="340" height="260" loading="lazy" />
+                <span class="product-card__badge product-card__badge--bestseller">Bestseller</span>
+              </figure>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__category">Dry Sweets</span>
+              <h3 class="product-card__name">
+                <a href="#kaju-katli" class="product-card__name-link">Kaju Katli</a>
+              </h3>
+              <p class="product-card__description">
+                Silky cashew fudge pressed into thin diamond shapes and adorned with edible silver vark. 
+                A timeless classic for every occasion.
+              </p>
+              <div class="product-card__meta">
+                <span class="product-card__price">
+                  <span class="product-card__price-currency">₹</span>580
+                </span>
+                <span class="product-card__weight">250 g</span>
+              </div>
+              <button class="btn btn--crimson btn--full product-card__add-btn"
+                      aria-label="Add Kaju Katli to cart">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+          <!-- END: Kaju Katli -->
+
+          <!-- ── Product Card 2: Gulab Jamun ── -->
+          <article class="product-card" data-category="bengali-sweets" aria-label="Gulab Jamun product">
+            <a href="#gulab-jamun" class="product-card__image-link" tabindex="-1">
+              <figure class="product-card__image-wrapper">
+                <img src="../static/images/gulabjamun.png" alt="Golden-brown Gulab Jamun balls soaked in rose-scented sugar syrup" class="product-card__image" width="340" height="260" loading="lazy" />
+                <span class="product-card__badge product-card__badge--popular">Popular</span>
+              </figure>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__category">Bengali Sweets</span>
+              <h3 class="product-card__name">
+                <a href="#gulab-jamun" class="product-card__name-link">Gulab Jamun</a>
+              </h3>
+              <p class="product-card__description">
+                Soft khoya dumplings fried to a deep golden hue and soaked overnight in fragrant 
+                rose and cardamom syrup.
+              </p>
+              <div class="product-card__meta">
+                <span class="product-card__price">
+                  <span class="product-card__price-currency">₹</span>320
+                </span>
+                <span class="product-card__weight">500 g · 12 pcs</span>
+              </div>
+              <button class="btn btn--crimson btn--full product-card__add-btn"
+                      aria-label="Add Gulab Jamun to cart">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+          <!-- END: Gulab Jamun -->
+
+          <!-- ── Product Card 3: Rasgulla ── -->
+          <article class="product-card" data-category="bengali-sweets" aria-label="Rasgulla product">
+            <a href="#rasgulla" class="product-card__image-link" tabindex="-1">
+              <figure class="product-card__image-wrapper">
+                <img src="../static/images/rasgulla.png" alt="White spongy Rasgulla balls floating in light sugar syrup in a clay pot" class="product-card__image" width="340" height="260" loading="lazy" />
+              </figure>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__category">Bengali Sweets</span>
+              <h3 class="product-card__name">
+                <a href="#rasgulla" class="product-card__name-link">Rasgulla</a>
+              </h3>
+              <p class="product-card__description">
+                Pillowy soft chenna balls simmered in light sugar syrup — the iconic Bengali sweet 
+                with a melt-in-mouth texture that never disappoints.
+              </p>
+              <div class="product-card__meta">
+                <span class="product-card__price">
+                  <span class="product-card__price-currency">₹</span>280
+                </span>
+                <span class="product-card__weight">500 g · 10 pcs</span>
+              </div>
+              <button class="btn btn--crimson btn--full product-card__add-btn"
+                      aria-label="Add Rasgulla to cart">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+          <!-- END: Rasgulla -->
+
+          <!-- ── Product Card 4: Sandesh ── -->
+          <article class="product-card" data-category="bengali-sweets" aria-label="Sandesh product">
+            <a href="#sandesh" class="product-card__image-link" tabindex="-1">
+              <figure class="product-card__image-wrapper">
+                <img src="../static/images/sandesh.png" alt="Delicate flower-moulded Sandesh pieces garnished with saffron strands" class="product-card__image" width="340" height="260" loading="lazy" />
+              </figure>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__category">Bengali Sweets</span>
+              <h3 class="product-card__name">
+                <a href="#sandesh" class="product-card__name-link">Sandesh</a>
+              </h3>
+              <p class="product-card__description">
+                Freshly prepared chenna moulded into exquisite floral shapes, lightly sweetened and 
+                delicately flavoured with rose water and saffron.
+              </p>
+              <div class="product-card__meta">
+                <span class="product-card__price">
+                  <span class="product-card__price-currency">₹</span>350
+                </span>
+                <span class="product-card__weight">250 g · 8 pcs</span>
+              </div>
+              <button class="btn btn--crimson btn--full product-card__add-btn"
+                      aria-label="Add Sandesh to cart">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+          <!-- END: Sandesh -->
+
+          <!-- ── Product Card 5: Motichoor Laddu ── -->
+          <!-- ── Product Card 5: Laddu ── -->
+<article class="product-card" data-category="festival-specials" aria-label="Laddu product">
+  <a href="#laddu" class="product-card__image-link" tabindex="-1">
+    <figure class="product-card__image-wrapper">
+      <img
+        src="../static/images/laddoo.png"
+        alt="Round golden Laddu garnished with pistachios on a brass tray"
+        class="product-card__image" width="340" height="260" loading="lazy" />
+      <span class="product-card__badge product-card__badge--festive">Festive Pick</span>
+    </figure>
+  </a>
+  <div class="product-card__body">
+    <span class="product-card__category">Festival Specials</span>
+    <h3 class="product-card__name">
+      <a href="#laddu" class="product-card__name-link">Laddu</a>
+    </h3>
+    <p class="product-card__description">
+      Classic handrolled laddus made with pure ghee, besan, and sugar — soft, 
+      rich, and melt-in-mouth. A beloved staple for every festival and celebration.
+    </p>
+    <div class="product-card__meta">
+      <span class="product-card__price">
+        <span class="product-card__price-currency">₹</span>420
+      </span>
+      <span class="product-card__weight">500 g · 10 pcs</span>
+    </div>
+    <button class="btn btn--crimson btn--full product-card__add-btn"
+            aria-label="Add Laddu to cart">
+      Add to Cart
+    </button>
+  </div>
+</article>
+<!-- END: Laddu -->
+         
+
+          <!-- ── Product Card 6: Soan Papdi ── -->
+          <article class="product-card" data-category="dry-sweets" aria-label="Soan Papdi product">
+            <a href="#soan-papdi" class="product-card__image-link" tabindex="-1">
+              <figure class="product-card__image-wrapper">
+                <img src="../static/images/soampapdi.png" alt="Flaky layered Soan Papdi pieces in a decorative tin box" class="product-card__image" width="340" height="260" loading="lazy" />
+              </figure>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__category">Dry Sweets</span>
+              <h3 class="product-card__name">
+                <a href="#soan-papdi" class="product-card__name-link">Soan Papdi</a>
+              </h3>
+              <p class="product-card__description">
+                Crisp, feather-light threads of sweetened gram flour that dissolve instantly on the 
+                tongue, laced with cardamom and studded with almonds.
+              </p>
+              <div class="product-card__meta">
+                <span class="product-card__price">
+                  <span class="product-card__price-currency">₹</span>260
+                </span>
+                <span class="product-card__weight">400 g</span>
+              </div>
+              <button class="btn btn--crimson btn--full product-card__add-btn"
+                      aria-label="Add Soan Papdi to cart">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+          <!-- END: Soan Papdi -->
+
+         
+          <!-- ── Product Card 7: Chocolate Sandesh ── -->
+<article class="product-card" data-category="dry-sweets" aria-label="Chocolate Sandesh product">
+  <a href="#chocolate-sandesh" class="product-card__image-link" tabindex="-1">
+    <figure class="product-card__image-wrapper">
+      <img
+        src="../static/images/chocolatesandesh.png"
+        alt="Chocolate Sandesh pieces garnished with cocoa and pistachio on a white plate"
+        class="product-card__image" width="340" height="260" loading="lazy" />
+      <span class="product-card__badge product-card__badge--premium">Must Try</span>
+    </figure>
+  </a>
+  <div class="product-card__body">
+    <span class="product-card__category">Bengali Sweets</span>
+    <h3 class="product-card__name">
+      <a href="#chocolate-sandesh" class="product-card__name-link">Chocolate Sandesh</a>
+    </h3>
+    <p class="product-card__description">
+      A modern twist on our classic Sandesh — fresh chenna blended with rich 
+      dark chocolate, moulded into elegant shapes and dusted with cocoa. 
+      Tradition meets indulgence in every bite.
+    </p>
+    <div class="product-card__meta">
+      <span class="product-card__price">
+        <span class="product-card__price-currency">₹</span>420
+      </span>
+      <span class="product-card__weight">250 g · 8 pcs</span>
+    </div>
+    <button class="btn btn--crimson btn--full product-card__add-btn"
+            aria-label="Add Chocolate Sandesh to cart">
+      Add to Cart
+    </button>
+  </div>
+</article>
+<!-- END: Chocolate Sandesh -->
+
+          <!-- ── Product Card 8: Festive Gift Box ── -->
+          <article class="product-card product-card--featured" data-category="gift-boxes" aria-label="Festive Gift Box product">
+            <a href="#festive-gift-box" class="product-card__image-link" tabindex="-1">
+              <figure class="product-card__image-wrapper">
+                <img src="IMG" alt="Elegant red and gold Rajkumar Sweets gift box tied with ribbon, filled with assorted sweets" class="product-card__image" width="340" height="260" loading="lazy" />
+                <span class="product-card__badge product-card__badge--gift">Gift Box</span>
+              </figure>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__category">Gift Boxes</span>
+              <h3 class="product-card__name">
+                <a href="#festive-gift-box" class="product-card__name-link">Festive Gift Box</a>
+              </h3>
+              <p class="product-card__description">
+                Curated selection of our finest sweets presented in a signature Rajkumar red and gold 
+                gift box — perfect for Diwali, weddings, and celebrations. Custom message included.
+              </p>
+              <div class="product-card__meta">
+                <span class="product-card__price">
+                  <span class="product-card__price-currency">₹</span>1,200
+                </span>
+                <span class="product-card__weight">1 kg · Assorted</span>
+              </div>
+              <button class="btn btn--gold btn--full product-card__add-btn"
+                      aria-label="Add Festive Gift Box to cart">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+          <!-- END: Festive Gift Box -->
+
+        </div>
+        <!-- END: Product Grid -->
+
+        <!-- View All CTA -->
+        <div class="products__view-all">
+          <a href="#all-products" class="btn btn--outline btn--lg" aria-label="View the complete sweet catalogue">
+            View Full Catalogue
+          </a>
+        </div>
+
+      </div>
+    </section>
+    <!-- END: PRODUCT LISTING -->
+
+
+    <!-- ──────────────────────────────────────────────────────────
+         WHY CHOOSE US / TRUST STRIP
+    ────────────────────────────────────────────────────────── -->
+    <section class="trust-strip" aria-labelledby="trust-heading">
+      <div class="trust-strip__inner container">
+        <h2 class="trust-strip__heading sr-only" id="trust-heading">Why Choose Rajkumar Sweets</h2>
+
+        <ul class="trust-strip__list">
+          <li class="trust-strip__item">
+            <span class="trust-strip__icon" aria-hidden="true">🏅</span>
+            <div class="trust-strip__text">
+              <strong class="trust-strip__title">45+ Years of Heritage</strong>
+              <span class="trust-strip__detail">Trusted by millions across India</span>
+            </div>
+          </li>
+          <li class="trust-strip__item">
+            <span class="trust-strip__icon" aria-hidden="true">🌿</span>
+            <div class="trust-strip__text">
+              <strong class="trust-strip__title">No Preservatives</strong>
+              <span class="trust-strip__detail">Made fresh daily with pure ingredients</span>
+            </div>
+          </li>
+          <li class="trust-strip__item">
+            <span class="trust-strip__icon" aria-hidden="true">📦</span>
+            <div class="trust-strip__text">
+              <strong class="trust-strip__title">Safe Packaging</strong>
+              <span class="trust-strip__detail">Tamper-proof &amp; hygienic delivery</span>
+            </div>
+          </li>
+          <li class="trust-strip__item">
+            <span class="trust-strip__icon" aria-hidden="true">🎁</span>
+            <div class="trust-strip__text">
+              <strong class="trust-strip__title">Custom Gift Hampers</strong>
+              <span class="trust-strip__detail">Personalised for every occasion</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- END: TRUST STRIP -->
+
+  </main>
+  <!-- END: MAIN CONTENT -->
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" id="contact" role="contentinfo">
+    <div class="site-footer__inner container">
+
+      <!-- Footer Brand Column -->
+      <div class="site-footer__col site-footer__col--brand">
+        <a href="#" class="site-footer__brand-link" aria-label="Rajkumar Sweets – Back to top">
+          <img src="IMG" alt="Rajkumar Sweets logo" class="site-footer__logo" width="48" height="48" loading="lazy" />
+          <span class="site-footer__shop-name">Rajkumar Sweets</span>
+        </a>
+        <p class="site-footer__description">
+          Crafting authentic Indian sweets with time-honoured recipes and the finest ingredients 
+          since 1978. Every bite carries the taste of tradition.
+        </p>
+
+        <!-- Social Links -->
+        <div class="site-footer__social" aria-label="Social media links">
+          <a href="#" class="site-footer__social-link" aria-label="Follow us on Instagram" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" class="site-footer__social-link" aria-label="Follow us on Facebook" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" class="site-footer__social-link" aria-label="Watch us on YouTube" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+            </svg>
+          </a>
+          <a href="#" class="site-footer__social-link" aria-label="Message us on WhatsApp" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <!-- END: Brand Column -->
+
+      <!-- Quick Links Column -->
+      <nav class="site-footer__col site-footer__col--links" aria-label="Quick links">
+        <h3 class="site-footer__col-heading">Quick Links</h3>
+        <ul class="site-footer__link-list">
+          <li><a href="#home"     class="site-footer__link">Home</a></li>
+          <li><a href="#products" class="site-footer__link">Our Products</a></li>
+          <li><a href="#about"    class="site-footer__link">About Us</a></li>
+          <li><a href="#contact"  class="site-footer__link">Contact</a></li>
+          <li><a href="#"         class="site-footer__link">Gift Hampers</a></li>
+          <li><a href="#"         class="site-footer__link">Festival Specials</a></li>
+          <li><a href="#"         class="site-footer__link">Track Your Order</a></li>
+        </ul>
+      </nav>
+
+      <!-- Policies Column -->
+      <nav class="site-footer__col site-footer__col--policies" aria-label="Policy links">
+        <h3 class="site-footer__col-heading">Policies</h3>
+        <ul class="site-footer__link-list">
+          <li><a href="#" class="site-footer__link">Privacy Policy</a></li>
+          <li><a href="#" class="site-footer__link">Terms &amp; Conditions</a></li>
+          <li><a href="#" class="site-footer__link">Refund Policy</a></li>
+          <li><a href="#" class="site-footer__link">Shipping Policy</a></li>
+          <li><a href="#" class="site-footer__link">FAQs</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact Info Column -->
+      <address class="site-footer__col site-footer__col--contact">
+        <h3 class="site-footer__col-heading">Contact Us</h3>
+        <ul class="site-footer__contact-list">
+          <li class="site-footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>12, Sweets Lane, Burrabazar,<br />Kolkata – 700 007, West Bengal</span>
+          </li>
+          <li class="site-footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l1.16-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/>
+            </svg>
+            <a href="tel:+913312345678" class="site-footer__link">+91 33 1234 5678</a>
+          </li>
+          <li class="site-footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <a href="mailto:orders@rajkumarsweets.in" class="site-footer__link">orders@rajkumarsweets.in</a>
+          </li>
+          <li class="site-footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Mon – Sun: 8 AM – 10 PM</span>
+          </li>
+        </ul>
+      </address>
+      <!-- END: Contact Column -->
+
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="site-footer__bottom">
+      <div class="site-footer__bottom-inner container">
+        <p class="site-footer__copyright">
+          &copy; <span id="footer-year">2024</span> Rajkumar Sweets. All rights reserved.
+          Crafted with <span aria-label="love">❤</span> in Kolkata.
+        </p>
+        <p class="site-footer__legal">
+          <a href="#" class="site-footer__link">Privacy Policy</a>
+          &middot;
+          <a href="#" class="site-footer__link">Terms of Use</a>
+        </p>
+      </div>
+    </div>
+    <!-- END: Footer Bottom Bar -->
+
+  </footer>
+  <!-- END: FOOTER -->
+
+
+  <!-- ============================================================
+       MINIMAL SCRIPTS
+       (Django template tags can be injected here later)
+  ============================================================ -->
+  <script>
+    /* Dynamic copyright year */
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    /* Mobile nav toggle */
+    const navToggle = document.querySelector('.site-nav__toggle');
+    const navMenu   = document.querySelector('.site-nav__list');
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isOpen));
+        navMenu.classList.toggle('site-nav__list--open');
+      });
+    }
+
+    /* Category filter (basic DOM filtering — swap for Django/AJAX later) */
+    const filterBtns = document.querySelectorAll('.products__filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+
+        filterBtns.forEach(b => {
+          b.classList.remove('products__filter-btn--active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('products__filter-btn--active');
+        btn.setAttribute('aria-selected', 'true');
+
+        productCards.forEach(card => {
+          const match = category === 'all' || card.dataset.category === category;
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
