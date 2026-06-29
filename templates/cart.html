@@ -20,7 +20,7 @@
   <header class="site-header" role="banner">
     <div class="site-header__inner container">
 
-      <a href="Landpage.html" class="site-header__brand" aria-label="Rajkumar Sweets – Home">
+      <a  href="{% url 'home' %}" class="site-header__brand" aria-label="Rajkumar Sweets – Home">
         <img src="../static/images/logo.png" alt="Rajkumar Sweets logo" class="site-header__logo" width="56" height="56" />
         <div class="site-header__brand-text">
           <span class="site-header__name">Rajkumar Sweets</span>
@@ -50,7 +50,7 @@
 
       <div class="cart-page__heading">
         <h1 class="cart-page__title">Your Cart</h1>
-        <a href="Landpage.html#products" class="cart-page__continue-link">← Continue Shopping</a>
+        <a  href="{% url 'home' %}" class="cart-page__continue-link">← Continue Shopping</a>
       </div>
 
       <!-- ── CART LAYOUT: Items (left) + Summary (right) ── -->

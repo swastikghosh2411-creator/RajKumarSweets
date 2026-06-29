@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +9,7 @@
   <title>Rajkumar Sweets – Authentic Indian Mithai</title>
 
   <!-- Google Fonts: Cormorant Garamond (display) + Jost (body) -->
-   <link rel="stylesheet" href="../static/css/Landpage.css">
+   <link rel="stylesheet" href="{% static 'css/Landpage.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -103,11 +103,11 @@
       <!-- Auth Buttons -->
       <div class="site-header__auth">
         <a href="#signin" class="btn btn--ghost btn--sm" aria-label="Sign in to your account">Sign In</a>
-        <a href="signup.html" class="btn btn--gold  btn--sm" aria-label="Create a new account">Sign Up</a>
+        <a href="{% url 'signup' %}" class="btn btn--gold  btn--sm" aria-label="Create a new account">Sign Up</a>
       </div>
 
       <!-- Cart Icon -->
-      <a href="cart.html" class="site-header__cart" aria-label="View shopping cart (0 items)">
+      <a href="{% url 'cart' %}" class="site-header__cart" aria-label="View shopping cart (0 items)"></a>
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
@@ -233,261 +233,62 @@
 
         <!-- Product Grid -->
         <div class="products__grid" id="product-grid" role="tabpanel" aria-label="Sweet products">
-
-          <!-- ── Product Card 1: Kaju Katli ── -->
-          <article class="product-card" data-category="dry-sweets" aria-label="Kaju Katli product">
-            <a href="#kaju-katli" class="product-card__image-link" tabindex="-1">
+          {% for product in products %}
+            <article class="product-card" aria-label="{{ product.name }} product">
               <figure class="product-card__image-wrapper">
-                <img src="../static/images/kajukatli.png" alt="Diamond-shaped Kaju Katli pieces dusted with silver vark on a gold plate" class="product-card__image" width="340" height="260" loading="lazy" />
-                <span class="product-card__badge product-card__badge--bestseller">Bestseller</span>
+                {% if product.image %}
+                  <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                    class="product-card__image"
+                    width="340"
+                    height="260"
+                    loading="lazy"
+                  />
+                {% endif %}
+
+                {% if product.is_bestseller %}
+                  <span class="product-card__badge product-card__badge--bestseller">Bestseller</span>
+                {% elif product.is_popular %}
+                  <span class="product-card__badge product-card__badge--popular">Popular</span>
+                {% endif %}
               </figure>
-            </a>
-            <div class="product-card__body">
-              <span class="product-card__category">Dry Sweets</span>
-              <h3 class="product-card__name">
-                <a href="#kaju-katli" class="product-card__name-link">Kaju Katli</a>
-              </h3>
-              <p class="product-card__description">
-                Silky cashew fudge pressed into thin diamond shapes and adorned with edible silver vark. 
-                A timeless classic for every occasion.
-              </p>
-              <div class="product-card__meta">
-                <span class="product-card__price">
-                  <span class="product-card__price-currency">₹</span>580
-                </span>
-                <span class="product-card__weight">250 g</span>
+
+              <div class="product-card__body">
+                <span class="product-card__category">{{ product.category.name }}</span>
+
+                <h3 class="product-card__name">
+                  <span class="product-card__name-link">{{ product.name }}</span>
+                </h3>
+
+                <p class="product-card__description">
+                  {{ product.description }}
+                </p>
+
+                <div class="product-card__meta">
+                  <span class="product-card__price">
+                    <span class="product-card__price-currency">₹</span>{{ product.price }}
+                  </span>
+
+                  {% if product.weight %}
+                    <span class="product-card__weight">{{ product.weight }}</span>
+                  {% endif %}
+                </div>
+
+                {% if product.stock > 0 %}
+                  <button class="btn btn--crimson btn--full product-card__add-btn">
+                    Add to Cart
+                  </button>
+                {% else %}
+                  <button class="btn btn--outline btn--full product-card__add-btn" disabled>
+                    Out of Stock
+                  </button>
+                {% endif %}
               </div>
-              <button class="btn btn--crimson btn--full product-card__add-btn"
-                      aria-label="Add Kaju Katli to cart">
-                Add to Cart
-              </button>
-            </div>
-          </article>
-          <!-- END: Kaju Katli -->
-
-          <!-- ── Product Card 2: Gulab Jamun ── -->
-          <article class="product-card" data-category="bengali-sweets" aria-label="Gulab Jamun product">
-            <a href="#gulab-jamun" class="product-card__image-link" tabindex="-1">
-              <figure class="product-card__image-wrapper">
-                <img src="../static/images/gulabjamun.png" alt="Golden-brown Gulab Jamun balls soaked in rose-scented sugar syrup" class="product-card__image" width="340" height="260" loading="lazy" />
-                <span class="product-card__badge product-card__badge--popular">Popular</span>
-              </figure>
-            </a>
-            <div class="product-card__body">
-              <span class="product-card__category">Bengali Sweets</span>
-              <h3 class="product-card__name">
-                <a href="#gulab-jamun" class="product-card__name-link">Gulab Jamun</a>
-              </h3>
-              <p class="product-card__description">
-                Soft khoya dumplings fried to a deep golden hue and soaked overnight in fragrant 
-                rose and cardamom syrup.
-              </p>
-              <div class="product-card__meta">
-                <span class="product-card__price">
-                  <span class="product-card__price-currency">₹</span>320
-                </span>
-                <span class="product-card__weight">500 g · 12 pcs</span>
-              </div>
-              <button class="btn btn--crimson btn--full product-card__add-btn"
-                      aria-label="Add Gulab Jamun to cart">
-                Add to Cart
-              </button>
-            </div>
-          </article>
-          <!-- END: Gulab Jamun -->
-
-          <!-- ── Product Card 3: Rasgulla ── -->
-          <article class="product-card" data-category="bengali-sweets" aria-label="Rasgulla product">
-            <a href="#rasgulla" class="product-card__image-link" tabindex="-1">
-              <figure class="product-card__image-wrapper">
-                <img src="../static/images/rasgulla.png" alt="White spongy Rasgulla balls floating in light sugar syrup in a clay pot" class="product-card__image" width="340" height="260" loading="lazy" />
-              </figure>
-            </a>
-            <div class="product-card__body">
-              <span class="product-card__category">Bengali Sweets</span>
-              <h3 class="product-card__name">
-                <a href="#rasgulla" class="product-card__name-link">Rasgulla</a>
-              </h3>
-              <p class="product-card__description">
-                Pillowy soft chenna balls simmered in light sugar syrup — the iconic Bengali sweet 
-                with a melt-in-mouth texture that never disappoints.
-              </p>
-              <div class="product-card__meta">
-                <span class="product-card__price">
-                  <span class="product-card__price-currency">₹</span>280
-                </span>
-                <span class="product-card__weight">500 g · 10 pcs</span>
-              </div>
-              <button class="btn btn--crimson btn--full product-card__add-btn"
-                      aria-label="Add Rasgulla to cart">
-                Add to Cart
-              </button>
-            </div>
-          </article>
-          <!-- END: Rasgulla -->
-
-          <!-- ── Product Card 4: Sandesh ── -->
-          <article class="product-card" data-category="bengali-sweets" aria-label="Sandesh product">
-            <a href="#sandesh" class="product-card__image-link" tabindex="-1">
-              <figure class="product-card__image-wrapper">
-                <img src="../static/images/sandesh.png" alt="Delicate flower-moulded Sandesh pieces garnished with saffron strands" class="product-card__image" width="340" height="260" loading="lazy" />
-              </figure>
-            </a>
-            <div class="product-card__body">
-              <span class="product-card__category">Bengali Sweets</span>
-              <h3 class="product-card__name">
-                <a href="#sandesh" class="product-card__name-link">Sandesh</a>
-              </h3>
-              <p class="product-card__description">
-                Freshly prepared chenna moulded into exquisite floral shapes, lightly sweetened and 
-                delicately flavoured with rose water and saffron.
-              </p>
-              <div class="product-card__meta">
-                <span class="product-card__price">
-                  <span class="product-card__price-currency">₹</span>350
-                </span>
-                <span class="product-card__weight">250 g · 8 pcs</span>
-              </div>
-              <button class="btn btn--crimson btn--full product-card__add-btn"
-                      aria-label="Add Sandesh to cart">
-                Add to Cart
-              </button>
-            </div>
-          </article>
-          <!-- END: Sandesh -->
-
-          <!-- ── Product Card 5: Motichoor Laddu ── -->
-          <!-- ── Product Card 5: Laddu ── -->
-<article class="product-card" data-category="festival-specials" aria-label="Laddu product">
-  <a href="#laddu" class="product-card__image-link" tabindex="-1">
-    <figure class="product-card__image-wrapper">
-      <img
-        src="../static/images/laddoo.png"
-        alt="Round golden Laddu garnished with pistachios on a brass tray"
-        class="product-card__image" width="340" height="260" loading="lazy" />
-      <span class="product-card__badge product-card__badge--festive">Festive Pick</span>
-    </figure>
-  </a>
-  <div class="product-card__body">
-    <span class="product-card__category">Festival Specials</span>
-    <h3 class="product-card__name">
-      <a href="#laddu" class="product-card__name-link">Laddu</a>
-    </h3>
-    <p class="product-card__description">
-      Classic handrolled laddus made with pure ghee, besan, and sugar — soft, 
-      rich, and melt-in-mouth. A beloved staple for every festival and celebration.
-    </p>
-    <div class="product-card__meta">
-      <span class="product-card__price">
-        <span class="product-card__price-currency">₹</span>420
-      </span>
-      <span class="product-card__weight">500 g · 10 pcs</span>
-    </div>
-    <button class="btn btn--crimson btn--full product-card__add-btn"
-            aria-label="Add Laddu to cart">
-      Add to Cart
-    </button>
-  </div>
-</article>
-<!-- END: Laddu -->
-         
-
-          <!-- ── Product Card 6: Soan Papdi ── -->
-          <article class="product-card" data-category="dry-sweets" aria-label="Soan Papdi product">
-            <a href="#soan-papdi" class="product-card__image-link" tabindex="-1">
-              <figure class="product-card__image-wrapper">
-                <img src="../static/images/soampapdi.png" alt="Flaky layered Soan Papdi pieces in a decorative tin box" class="product-card__image" width="340" height="260" loading="lazy" />
-              </figure>
-            </a>
-            <div class="product-card__body">
-              <span class="product-card__category">Dry Sweets</span>
-              <h3 class="product-card__name">
-                <a href="#soan-papdi" class="product-card__name-link">Soan Papdi</a>
-              </h3>
-              <p class="product-card__description">
-                Crisp, feather-light threads of sweetened gram flour that dissolve instantly on the 
-                tongue, laced with cardamom and studded with almonds.
-              </p>
-              <div class="product-card__meta">
-                <span class="product-card__price">
-                  <span class="product-card__price-currency">₹</span>260
-                </span>
-                <span class="product-card__weight">400 g</span>
-              </div>
-              <button class="btn btn--crimson btn--full product-card__add-btn"
-                      aria-label="Add Soan Papdi to cart">
-                Add to Cart
-              </button>
-            </div>
-          </article>
-          <!-- END: Soan Papdi -->
-
-         
-          <!-- ── Product Card 7: Chocolate Sandesh ── -->
-<article class="product-card" data-category="dry-sweets" aria-label="Chocolate Sandesh product">
-  <a href="#chocolate-sandesh" class="product-card__image-link" tabindex="-1">
-    <figure class="product-card__image-wrapper">
-      <img
-        src="../static/images/chocolatesandesh.png"
-        alt="Chocolate Sandesh pieces garnished with cocoa and pistachio on a white plate"
-        class="product-card__image" width="340" height="260" loading="lazy" />
-      <span class="product-card__badge product-card__badge--premium">Must Try</span>
-    </figure>
-  </a>
-  <div class="product-card__body">
-    <span class="product-card__category">Bengali Sweets</span>
-    <h3 class="product-card__name">
-      <a href="#chocolate-sandesh" class="product-card__name-link">Chocolate Sandesh</a>
-    </h3>
-    <p class="product-card__description">
-      A modern twist on our classic Sandesh — fresh chenna blended with rich 
-      dark chocolate, moulded into elegant shapes and dusted with cocoa. 
-      Tradition meets indulgence in every bite.
-    </p>
-    <div class="product-card__meta">
-      <span class="product-card__price">
-        <span class="product-card__price-currency">₹</span>420
-      </span>
-      <span class="product-card__weight">250 g · 8 pcs</span>
-    </div>
-    <button class="btn btn--crimson btn--full product-card__add-btn"
-            aria-label="Add Chocolate Sandesh to cart">
-      Add to Cart
-    </button>
-  </div>
-</article>
-<!-- END: Chocolate Sandesh -->
-
-          <!-- ── Product Card 8: Festive Gift Box ── -->
-          <article class="product-card product-card--featured" data-category="gift-boxes" aria-label="Festive Gift Box product">
-            <a href="#festive-gift-box" class="product-card__image-link" tabindex="-1">
-              <figure class="product-card__image-wrapper">
-                <img src="IMG" alt="Elegant red and gold Rajkumar Sweets gift box tied with ribbon, filled with assorted sweets" class="product-card__image" width="340" height="260" loading="lazy" />
-                <span class="product-card__badge product-card__badge--gift">Gift Box</span>
-              </figure>
-            </a>
-            <div class="product-card__body">
-              <span class="product-card__category">Gift Boxes</span>
-              <h3 class="product-card__name">
-                <a href="#festive-gift-box" class="product-card__name-link">Festive Gift Box</a>
-              </h3>
-              <p class="product-card__description">
-                Curated selection of our finest sweets presented in a signature Rajkumar red and gold 
-                gift box — perfect for Diwali, weddings, and celebrations. Custom message included.
-              </p>
-              <div class="product-card__meta">
-                <span class="product-card__price">
-                  <span class="product-card__price-currency">₹</span>1,200
-                </span>
-                <span class="product-card__weight">1 kg · Assorted</span>
-              </div>
-              <button class="btn btn--gold btn--full product-card__add-btn"
-                      aria-label="Add Festive Gift Box to cart">
-                Add to Cart
-              </button>
-            </div>
-          </article>
-          <!-- END: Festive Gift Box -->
+            </article>
+          {% empty %}
+            <p>No products found.</p>
+          {% endfor %}
 
         </div>
         <!-- END: Product Grid -->
