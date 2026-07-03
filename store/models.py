@@ -6,7 +6,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     category = models.ForeignKey(
         Category,
@@ -15,7 +14,6 @@ class Product(models.Model):
     )
 
     name = models.CharField(max_length=200)
-
     description = models.TextField()
 
     price = models.DecimalField(
@@ -28,46 +26,23 @@ class Product(models.Model):
         help_text="Example: 250g, 500g, 1kg"
     )
 
-    stock = models.PositiveIntegerField(
-        default=0
-    )
+    stock = models.PositiveIntegerField(default=0)
 
-    is_bestseller = models.BooleanField(
-        default=False
-    )
+    is_bestseller = models.BooleanField(default=False)
+    is_popular = models.BooleanField(default=False)
 
-    is_popular = models.BooleanField(
-        default=False
-    )
-
-    is_bengali_sweets = models.BooleanField(
-        default = False
-    )
-
-    is_gift_box = models.BooleanField(
-        default = False
-    )
-
-    is_dry_sweets = models.BooleanField(
-        default = False
-    )
-
-    is_festival_special = models.BooleanField(
-        default = False
-    )
     image = models.ImageField(
         upload_to='products/',
         blank=True,
         null=True
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    def __str__(self):
+        return self.name
+
 
 
     def __str__(self):

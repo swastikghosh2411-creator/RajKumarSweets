@@ -24,15 +24,10 @@ class ProductAdmin(admin.ModelAdmin):
         'category',
         'is_bestseller',
         'is_popular',
-        'is_bengali_sweets',
-        'is_gift_box',
-        'is_dry_sweets',
-        'is_festival_special',
-
     ]
 
     search_fields = [
         'name',
         'description',
-        'category__name'
+        'category__name',
     ]

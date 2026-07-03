@@ -107,13 +107,15 @@
       </div>
 
       <!-- Cart Icon -->
-      <a href="{% url 'cart' %}" class="site-header__cart" aria-label="View shopping cart (0 items)"></a>
+      <a href="{% url 'cart' %}" class="site-header__cart" aria-label="View shopping cart (0 items)">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
         </svg>
-        <span class="site-header__cart-count" aria-live="polite">0</span>
+        <span class="site-header__cart-count" aria-live="polite">
+          {{ request.session.cart|length|default:0 }}
+        </span>
       </a>
 
     </div>
@@ -234,7 +236,8 @@
         <!-- Product Grid -->
         <div class="products__grid" id="product-grid" role="tabpanel" aria-label="Sweet products">
           {% for product in products %}
-            <article class="product-card" aria-label="{{ product.name }} product">
+            <article class="product-card" data-category="{{ product.category.name|slugify }}"aria-label="{{ product.name }} product"
+>
               <figure class="product-card__image-wrapper">
                 {% if product.image %}
                   <img
@@ -247,11 +250,15 @@
                   />
                 {% endif %}
 
-                {% if product.is_bestseller %}
-                  <span class="product-card__badge product-card__badge--bestseller">Bestseller</span>
-                {% elif product.is_popular %}
-                  <span class="product-card__badge product-card__badge--popular">Popular</span>
-                {% endif %}
+                <div class="product-card__badges">
+                  {% if product.is_bestseller %}
+                    <span class="product-card__badge product-card__badge--bestseller">Bestseller</span>
+                  {% endif %}
+
+                  {% if product.is_popular %}
+                    <span class="product-card__badge product-card__badge--popular">Popular</span>
+                  {% endif %}
+                </div>
               </figure>
 
               <div class="product-card__body">
@@ -276,9 +283,12 @@
                 </div>
 
                 {% if product.stock > 0 %}
-                  <button class="btn btn--crimson btn--full product-card__add-btn">
-                    Add to Cart
-                  </button>
+                  <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn--crimson btn--full product-card__add-btn">
+                      Add to Cart
+                    </button>
+                  </form>
                 {% else %}
                   <button class="btn btn--outline btn--full product-card__add-btn" disabled>
                     Out of Stock
