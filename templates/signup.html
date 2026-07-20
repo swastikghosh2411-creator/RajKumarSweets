@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +9,11 @@
   <title>Sign Up – Rajkumar Sweets</title>
 
   <!-- Link your main stylesheet here -->
-  <link rel="stylesheet" href="../static/css/rajkumar_sweets.css" />
-  <!-- Link your signup-specific stylesheet here -->
- <link rel="stylesheet" href="../static/css/signup.css">
+  <link rel="stylesheet" href="{% static 'css/Landpage.css' %}">
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
 
 <body class="page--signup">
@@ -98,7 +101,7 @@
           <!-- Decorative background image -->
           <figure class="auth-panel__image-wrapper">
             <img
-              src="IMG"
+              src="{% static 'images/signup.png' %}"
               alt="An elegant spread of Rajkumar Sweets' finest mithai — Kaju Katli, Gulab Jamun, and Sandesh arranged on a gold-rimmed platter"
               class="auth-panel__image"
               width="680"
