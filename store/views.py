@@ -37,7 +37,7 @@ def home(request):
 
 
 def signin(request):
-    return HttpResponse("Signin backend route working")
+    return render(request, 'signin.html')
 
 
 def signup(request):
