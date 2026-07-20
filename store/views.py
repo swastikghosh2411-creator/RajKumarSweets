@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.db.models import Q
 from .models import Product
 from django.contrib import messages
+from django.urls import reverse
 
 def home(request):
     products = Product.objects.all()
@@ -63,7 +64,7 @@ def add_to_cart(request, product_id):
         else:
             messages.warning(request, f"Only {product.stock} item(s) of {product.name} are available.")
 
-    return redirect('cart')
+    return HttpResponseRedirect(reverse('home') + '#products')
 
 def cart(request):
     cart = request.session.get('cart', {})
