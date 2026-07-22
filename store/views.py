@@ -137,3 +137,26 @@ def decrease_cart_item(request, product_id):
     request.session.modified = True
 
     return redirect('cart')
+
+def checkout(request):
+    cart = request.session.get('cart', {})
+
+    cart_items = []
+    total_price = 0
+
+    for product_id, quantity in cart.items():
+        product = get_object_or_404(Product, id=int(product_id))
+
+        subtotal = product.price * quantity
+        total_price += subtotal
+
+        cart_items.append({
+            'product': product,
+            'quantity': quantity,
+            'subtotal': subtotal,
+        })
+
+    return render(request, 'checkout.html', {
+        'cart_items': cart_items,
+        'total_price': total_price,
+    })
