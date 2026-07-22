@@ -1,11 +1,11 @@
 /* ============================================================
-   SIGNUP PAGE — signup.css
+   SIGNIN PAGE — signin.css
    Depends on: Landpage.css (variables, reset, buttons, navbar)
    ============================================================ */
 
 
 /* ── Page Layout: two-column split ── */
-.signup-page {
+.signin-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - var(--navbar-h));
@@ -13,10 +13,10 @@
 
 
 /* ============================================================
-   LEFT PANEL — brand side
+   LEFT PANEL — brand / decorative side
    ============================================================ */
 
-.signup-panel {
+.signin-panel {
   background: var(--grad-maroon);
   display: flex;
   align-items: center;
@@ -26,35 +26,39 @@
   overflow: hidden;
 }
 
-/* Decorative gold glow top-right */
-.signup-panel::before {
+/* Soft gold glow in top-right corner */
+.signin-panel::before {
   content: '';
   position: absolute;
-  top: -100px; right: -100px;
-  width: 420px; height: 420px;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 65%);
   pointer-events: none;
 }
 
-/* Decorative glow bottom-left */
-.signup-panel::after {
+/* Subtle bottom glow */
+.signin-panel::after {
   content: '';
   position: absolute;
-  bottom: -80px; left: -60px;
-  width: 320px; height: 320px;
+  bottom: -80px;
+  left: -60px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 65%);
   pointer-events: none;
 }
 
-.signup-panel__content {
+.signin-panel__content {
   position: relative;
   z-index: 1;
   max-width: 380px;
 }
 
-.signup-panel__kicker {
+.signin-panel__kicker {
   display: inline-block;
   font-size: var(--fs-xs);
   font-weight: 600;
@@ -68,7 +72,7 @@
   background: rgba(212, 175, 55, 0.08);
 }
 
-.signup-panel__heading {
+.signin-panel__heading {
   font-family: var(--ff-display);
   font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
@@ -77,78 +81,55 @@
   margin-bottom: var(--sp-5);
 }
 
-.signup-panel__heading em {
+.signin-panel__heading em {
   font-style: italic;
   color: var(--clr-gold-lt);
 }
 
-.signup-panel__text {
+.signin-panel__text {
   font-size: var(--fs-sm);
   color: rgba(255, 248, 238, 0.65);
   line-height: var(--lh-loose);
-  margin-bottom: var(--sp-6);
-}
-
-/* Testimonial quote */
-.signup-panel__quote {
-  background: rgba(212, 175, 55, 0.08);
-  border-left: 3px solid var(--clr-gold);
-  border-radius: 0 var(--r-md) var(--r-md) 0;
-  padding: var(--sp-4) var(--sp-5);
-  margin-bottom: var(--sp-6);
-}
-
-.signup-panel__quote p {
-  font-size: var(--fs-sm);
-  font-style: italic;
-  color: rgba(255, 248, 238, 0.80);
-  line-height: var(--lh-loose);
-  margin-bottom: var(--sp-2);
-}
-
-.signup-panel__quote footer {
-  font-size: var(--fs-xs);
-  color: var(--clr-gold);
-  font-weight: 500;
+  margin-bottom: var(--sp-8);
 }
 
 /* Perks list */
-.signup-panel__perks {
+.signin-panel__perks {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--sp-3);
 }
 
-.signup-panel__perks li {
+.signin-panel__perks li {
   font-size: var(--fs-sm);
   color: rgba(255, 248, 238, 0.75);
   padding: var(--sp-3) var(--sp-4);
-  background: rgba(212, 175, 55, 0.07);
+  background: rgba(212, 175, 55, 0.08);
   border: 1px solid rgba(212, 175, 55, 0.18);
   border-radius: var(--r-md);
+  letter-spacing: 0.01em;
 }
 
 
 /* ============================================================
-   RIGHT SIDE — form
+   RIGHT SIDE — form container
    ============================================================ */
 
-.signup-form-wrap {
+.signin-form-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--sp-10) var(--sp-8);
+  padding: var(--sp-12) var(--sp-8);
   background: var(--clr-cream);
-  overflow-y: auto;
 }
 
-.signup-card {
+.signin-card {
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
 }
 
-.signup-card__title {
+.signin-card__title {
   font-family: var(--ff-display);
   font-size: var(--fs-2xl);
   font-weight: 700;
@@ -156,8 +137,8 @@
   margin-bottom: var(--sp-2);
 }
 
-/* Gold underline under title */
-.signup-card__title::after {
+/* Gold underline under the title */
+.signin-card__title::after {
   content: '';
   display: block;
   width: 48px;
@@ -167,30 +148,25 @@
   margin-top: var(--sp-3);
 }
 
-.signup-card__subtitle {
+.signin-card__subtitle {
   font-size: var(--fs-sm);
   color: var(--clr-text-muted);
   margin-top: var(--sp-3);
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-8);
 }
 
-.signup-card__link {
+.signin-card__link {
   color: var(--clr-crimson);
   font-weight: 600;
   transition: color var(--dur-fast) var(--ease-out);
 }
 
-.signup-card__link:hover { color: var(--clr-maroon); }
-
-.signup-card__footer {
-  font-size: var(--fs-xs);
-  color: var(--clr-text-light);
-  text-align: center;
-  margin-top: var(--sp-6);
+.signin-card__link:hover {
+  color: var(--clr-maroon);
 }
 
-/* Alert messages */
-.signup-alert {
+/* Alert / error message from Django */
+.signin-alert {
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--r-md);
   font-size: var(--fs-sm);
@@ -198,13 +174,13 @@
   border: 1px solid;
 }
 
-.signup-alert--error {
+.signin-alert--error {
   background: rgba(139, 30, 45, 0.08);
   border-color: rgba(139, 30, 45, 0.30);
   color: var(--clr-crimson);
 }
 
-.signup-alert--success {
+.signin-alert--success {
   background: rgba(42, 110, 60, 0.08);
   border-color: rgba(42, 110, 60, 0.30);
   color: #2a6e3c;
@@ -215,10 +191,10 @@
    FORM FIELDS
    ============================================================ */
 
-.signup-form {
+.signin-form {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-4);
+  gap: var(--sp-5);
 }
 
 .form-field {
@@ -227,30 +203,34 @@
   gap: var(--sp-2);
 }
 
+/* Row with label + forgot link side by side */
+.form-field__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .form-field__label {
   font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--clr-text);
 }
 
-/* Input wrapper — holds icon + input + eye button */
-.form-field__wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
+.form-field__forgot {
+  font-size: var(--fs-xs);
+  color: var(--clr-crimson);
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
-.form-field__icon {
-  position: absolute;
-  left: 0.9em;
-  color: var(--clr-text-light);
-  pointer-events: none;
-  flex-shrink: 0;
+.form-field__forgot:hover {
+  color: var(--clr-maroon);
 }
 
+/* Text / email / password input */
 .form-field__input {
   width: 100%;
-  padding: 0.75em 1em 0.75em 2.6em; /* left padding for icon */
+  padding: 0.75em 1em;
   font-family: var(--ff-body);
   font-size: var(--fs-base);
   color: var(--clr-text);
@@ -263,33 +243,41 @@
     box-shadow   var(--dur-fast) var(--ease-out);
 }
 
-.form-field__input::placeholder { color: var(--clr-text-light); }
+.form-field__input::placeholder {
+  color: var(--clr-text-light);
+}
 
 .form-field__input:focus {
   border-color: var(--clr-gold);
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
-/* Password inputs need extra right padding for the eye button */
-.form-field__wrap:has(.form-field__eye) .form-field__input {
-  padding-right: 2.8em;
+/* Password field wrapper (input + eye button) */
+.form-field__input-wrap {
+  position: relative;
 }
 
-/* Eye (show/hide) button */
+.form-field__input-wrap .form-field__input {
+  padding-right: 3em;  /* room for the eye button */
+}
+
 .form-field__eye {
   position: absolute;
   right: 0.8em;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   color: var(--clr-text-light);
   display: flex;
   align-items: center;
-  padding: 0;
   transition: color var(--dur-fast) var(--ease-out);
 }
 
-.form-field__eye:hover { color: var(--clr-maroon); }
+.form-field__eye:hover {
+  color: var(--clr-maroon);
+}
 
 /* Checkbox row */
 .form-field--checkbox {
@@ -310,78 +298,53 @@
   font-size: var(--fs-sm);
   color: var(--clr-text-muted);
   cursor: pointer;
-  line-height: var(--lh-snug);
 }
 
-/* Submit button */
-.signup-submit {
+/* Submit button — extra top margin */
+.signin-submit {
   margin-top: var(--sp-2);
   padding: 0.85em 1em;
   font-size: var(--fs-base);
 }
 
-
-/* ============================================================
-   PASSWORD STRENGTH BAR
-   ============================================================ */
-
-.pw-strength {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  margin-top: var(--sp-1);
-}
-
-.pw-strength__bars {
-  display: flex;
-  gap: 4px;
-  flex: 1;
-}
-
-.pw-strength__bar {
-  flex: 1;
-  height: 4px;
-  border-radius: var(--r-pill);
-  background: var(--clr-border);
-  opacity: 0.2;
-  transition: background var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
-}
-
-.pw-strength__label {
+/* Footer note below the form */
+.signin-card__footer {
   font-size: var(--fs-xs);
-  font-weight: 500;
   color: var(--clr-text-light);
-  min-width: 80px;
-  text-align: right;
-  transition: color var(--dur-base) var(--ease-out);
+  text-align: center;
+  margin-top: var(--sp-6);
+  line-height: var(--lh-loose);
 }
-
-/* Password match message */
-.form-field__match {
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  min-height: 1.2em;
-}
-
-.form-field__match--ok  { color: #27ae60; }
-.form-field__match--err { color: var(--clr-crimson); }
 
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
+/* Tablet: stack vertically, hide panel */
 @media (max-width: 1023px) {
-  .signup-page { grid-template-columns: 1fr; }
-  .signup-panel { display: none; } /* hide on tablet/mobile */
-  .signup-form-wrap { padding: var(--sp-10) var(--sp-6); }
+  .signin-page {
+    grid-template-columns: 1fr;
+  }
+
+  .signin-panel {
+    display: none;  /* hide on smaller screens to keep it clean */
+  }
+
+  .signin-form-wrap {
+    padding: var(--sp-10) var(--sp-6);
+  }
 }
 
+/* Mobile */
 @media (max-width: 767px) {
-  .signup-form-wrap {
+  .signin-form-wrap {
     padding: var(--sp-8) var(--sp-4);
     align-items: flex-start;
     padding-top: var(--sp-10);
   }
-  .signup-card { max-width: 100%; }
+
+  .signin-card {
+    max-width: 100%;
+  }
 }

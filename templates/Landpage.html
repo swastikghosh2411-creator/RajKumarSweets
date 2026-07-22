@@ -102,7 +102,7 @@
 
       <!-- Auth Buttons -->
       <div class="site-header__auth">
-        <a href="#signin" class="btn btn--ghost btn--sm" aria-label="Sign in to your account">Sign In</a>
+        <a href="{% url 'signin' %}" class="btn btn--ghost btn--sm" aria-label="Sign in to your account">Sign In</a>
         <a href="{% url 'signup' %}" class="btn btn--gold  btn--sm" aria-label="Create a new account">Sign Up</a>
       </div>
 
@@ -282,18 +282,17 @@
                   {% endif %}
                 </div>
 
-                {% if product.stock > 0 %}
-                  <form method="POST" action="{% url 'add_to_cart' product.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn--crimson btn--full product-card__add-btn">
-                      Add to Cart
-                    </button>
-                  </form>
-                {% else %}
-                  <button class="btn btn--outline btn--full product-card__add-btn" disabled>
-                    Out of Stock
-                  </button>
-                {% endif %}
+              {% if product.stock > 0 %}
+               <button 
+            class="btn btn--crimson btn--full product-card__add-btn"
+             onclick="addToCart(event, {{ product.id }})">
+             Add to Cart
+            </button>
+            {% else %}
+          <button class="btn btn--outline btn--full product-card__add-btn" disabled>
+            Out of Stock
+          </button>
+           {% endif %}
               </div>
             </article>
           {% empty %}
@@ -537,6 +536,39 @@
         });
       });
     });
+
+
+
+    // Add to Cart functionality
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      document.cookie.split(';').forEach(cookie => {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+          cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+        }
+      });
+    }
+    return cookieValue;
+  }
+
+  function addToCart(event, productId) {
+    event.preventDefault();
+    fetch(`/cart/add/${productId}/`, {  // ← was /add-to-cart/
+      method: 'POST',
+      headers: { 'X-CSRFToken': getCookie('csrftoken') },
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        const cartCount = document.querySelector('.site-header__cart-count');
+        if (cartCount) cartCount.textContent = parseInt(cartCount.textContent || 0) + 1;
+      } else {
+        alert(data.message);
+      }
+    });
+  }
   </script>
 
 </body>

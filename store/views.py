@@ -37,7 +37,7 @@ def home(request):
 
 
 def signin(request):
-    return HttpResponse("Signin backend route working")
+    return render(request, 'signin.html')
 
 
 def signup(request):
@@ -61,10 +61,11 @@ def add_to_cart(request, product_id):
             cart[product_id_str] = current_quantity + 1
             request.session['cart'] = cart
             request.session.modified = True
+            return JsonResponse({'success': True})
         else:
-            messages.warning(request, f"Only {product.stock} item(s) of {product.name} are available.")
+            return JsonResponse({'success': False, 'message': f"Only {product.stock} item(s) available."})
 
-    return HttpResponseRedirect(reverse('home') + '#products')
+    return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
 
 def cart(request):
     cart = request.session.get('cart', {})
