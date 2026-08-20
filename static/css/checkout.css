@@ -1,172 +1,15 @@
 /* ============================================================
    checkout.css — Rajkumar Sweets Checkout Page Styles
-   Palette matches Landpage.css / cart.css: Crimson · Gold · Cream
+   Page-specific only. Depends on base.css for variables, reset,
+   navbar, footer, and buttons.
 ============================================================ */
-
-/* ── CSS Variables (mirror Landpage / Cart) ── */
-:root {
-  --clr-crimson:     #9B1C1C;
-  --clr-crimson-dk:  #7A1414;
-  --clr-gold:        #C9943A;
-  --clr-gold-lt:     #E8C36A;
-  --clr-cream:       #FDF6EC;
-  --clr-cream-dk:    #F5E8D0;
-  --clr-dark:        #1A0A00;
-  --clr-muted:       #6B4C2A;
-  --clr-border:      #E8D8C0;
-  --clr-success:     #2E7D32;
-  --clr-error:       #C62828;
-
-  --ff-display:      'Cormorant Garamond', Georgia, serif;
-  --ff-body:         'Jost', sans-serif;
-
-  --radius-sm:       6px;
-  --radius-md:       12px;
-  --radius-lg:       20px;
-  --transition:      0.22s ease;
-
-  --shadow-sm:       0 2px 8px rgba(26,10,0,0.08);
-  --shadow-md:       0 4px 20px rgba(26,10,0,0.12);
-}
-
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--ff-body);
-  background-color: var(--clr-cream);
-  color: var(--clr-dark);
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-img    { display: block; max-width: 100%; height: auto; }
-a      { text-decoration: none; color: inherit; }
-ul, ol { list-style: none; }
-main   { flex: 1; }
-button { font-family: inherit; }
-
-
-/* ── Container ── */
-.container {
-  width: 100%;
-  max-width: 1180px;
-  margin-inline: auto;
-  padding-inline: 24px;
-}
-
-
-/* ============================================================
-   HEADER (matches Cart page / Landpage header styling)
-============================================================ */
-.site-header {
-  background: var(--clr-cream);
-  border-bottom: 1px solid var(--clr-border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.site-header__inner {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding-block: 14px;
-}
-.site-header__brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-.site-header__logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.site-header__brand-text {
-  display: flex;
-  flex-direction: column;
-}
-.site-header__name {
-  font-family: var(--ff-display);
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--clr-crimson);
-  line-height: 1.2;
-}
-.site-header__tagline {
-  font-size: 0.7rem;
-  color: var(--clr-muted);
-  letter-spacing: 0.04em;
-}
-.site-nav { margin-left: auto; }
-.site-nav__list {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-.site-nav__link {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--clr-muted);
-  transition: color var(--transition);
-}
-.site-nav__link:hover { color: var(--clr-crimson); }
-
-
-/* ============================================================
-   BUTTONS (shared)
-============================================================ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--ff-body);
-  font-size: 0.88rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid transparent;
-  padding: 10px 22px;
-  cursor: pointer;
-  transition: background var(--transition), color var(--transition), border-color var(--transition), transform 0.1s;
-  text-align: center;
-  white-space: nowrap;
-}
-.btn:active { transform: scale(0.97); }
-
-.btn--crimson {
-  background: var(--clr-crimson);
-  color: #fff;
-  border-color: var(--clr-crimson);
-}
-.btn--crimson:hover { background: var(--clr-crimson-dk); border-color: var(--clr-crimson-dk); }
-
-.btn--full { width: 100%; }
-
-/* Small text-style link button, used for "+ Deliver to a new address" */
-.link-btn {
-  background: none;
-  border: none;
-  color: var(--clr-crimson);
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 4px 0;
-  margin-top: 12px;
-  transition: opacity var(--transition);
-}
-.link-btn:hover { opacity: 0.7; }
 
 
 /* ============================================================
    CHECKOUT PROGRESS STEPS
 ============================================================ */
 .steps-bar {
-  background: #fff;
+  background: var(--clr-white);
   border-bottom: 1px solid var(--clr-border);
   padding-block: 18px;
 }
@@ -180,7 +23,7 @@ button { font-family: inherit; }
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
   opacity: 0.5;
 }
 .steps__item::after {
@@ -206,24 +49,41 @@ button { font-family: inherit; }
   font-size: 0.8rem;
   font-weight: 600;
   background: var(--clr-cream-dk);
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
   border: 1.5px solid var(--clr-border);
 }
 .steps__item--done .steps__circle {
-  background: var(--clr-success);
-  border-color: var(--clr-success);
-  color: #fff;
+  background: #2E7D32;
+  border-color: #2E7D32;
+  color: var(--clr-white);
 }
 .steps__item--active .steps__circle {
   background: var(--clr-crimson);
   border-color: var(--clr-crimson);
-  color: #fff;
+  color: var(--clr-white);
 }
 .steps__label {
   font-size: 0.85rem;
   font-weight: 500;
 }
 .steps__item--active .steps__label { color: var(--clr-crimson); font-weight: 600; }
+
+
+/* ============================================================
+   LINK BUTTON ("+ Deliver to a new address")
+============================================================ */
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--clr-crimson);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 12px;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.link-btn:hover { opacity: 0.7; }
 
 
 /* ============================================================
@@ -236,7 +96,7 @@ button { font-family: inherit; }
   font-family: var(--ff-display);
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 700;
-  color: var(--clr-dark);
+  color: var(--clr-text);
   margin-bottom: 28px;
 }
 
@@ -268,9 +128,9 @@ button { font-family: inherit; }
 }
 
 .checkout-card {
-  background: #fff;
+  background: var(--clr-white);
   border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--r-md);
   padding: 24px;
   box-shadow: var(--shadow-sm);
 }
@@ -282,7 +142,7 @@ button { font-family: inherit; }
   font-family: var(--ff-display);
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--clr-dark);
+  color: var(--clr-text);
   margin-bottom: 20px;
 }
 .checkout-card__number {
@@ -291,7 +151,7 @@ button { font-family: inherit; }
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--clr-crimson);
-  color: #fff;
+  color: var(--clr-white);
   font-family: var(--ff-body);
   font-size: 0.78rem;
   font-weight: 600;
@@ -303,7 +163,7 @@ button { font-family: inherit; }
   font-family: var(--ff-body);
   font-size: 0.78rem;
   font-weight: 400;
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
 }
 
 
@@ -323,7 +183,7 @@ button { font-family: inherit; }
 .form-field__label {
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
 }
 .form-field__label--checkbox {
   flex-direction: row;
@@ -335,23 +195,22 @@ button { font-family: inherit; }
   width: 100%;
   padding: 11px 14px;
   border: 1.5px solid var(--clr-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
   font-family: var(--ff-body);
   font-size: 0.92rem;
   background: var(--clr-cream);
-  color: var(--clr-dark);
+  color: var(--clr-text);
   outline: none;
-  transition: border-color var(--transition);
+  transition: border-color var(--dur-fast) var(--ease-out);
 }
 .form-field__input:focus { border-color: var(--clr-gold); }
-.form-field__input::placeholder { color: #B79A78; }
+.form-field__input::placeholder { color: var(--clr-text-light); }
 .form-field__textarea { resize: vertical; min-height: 80px; }
 
 @media (max-width: 560px) {
   .form-grid { grid-template-columns: 1fr; }
 }
 
-/* New-address block gets a top divider + spacing when revealed */
 .form-grid--new-address {
   margin-top: 18px;
   padding-top: 18px;
@@ -371,9 +230,9 @@ button { font-family: inherit; }
   gap: 12px;
   padding: 14px 16px;
   border: 1.5px solid var(--clr-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
   cursor: pointer;
-  transition: border-color var(--transition), background var(--transition);
+  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
 .saved-address:hover { border-color: var(--clr-gold); }
 .saved-address--selected {
@@ -388,7 +247,7 @@ button { font-family: inherit; }
 }
 .saved-address__text {
   font-size: 0.88rem;
-  color: var(--clr-dark);
+  color: var(--clr-text);
 }
 .saved-address__text strong {
   color: var(--clr-crimson);
@@ -408,9 +267,9 @@ button { font-family: inherit; }
   gap: 14px;
   padding: 14px 16px;
   border: 1.5px solid var(--clr-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
   cursor: pointer;
-  transition: border-color var(--transition), background var(--transition);
+  transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
 }
 .payment-option:hover { border-color: var(--clr-gold); }
 .payment-option--selected {
@@ -432,36 +291,36 @@ button { font-family: inherit; }
   flex-direction: column;
   gap: 2px;
   font-size: 0.9rem;
-  color: var(--clr-dark);
+  color: var(--clr-text);
 }
 .payment-option__text small {
   font-size: 0.76rem;
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
   font-weight: 400;
 }
 
 
 /* ============================================================
-   RIGHT COLUMN: ORDER SUMMARY SIDEBAR
+   RIGHT COLUMN: ORDER SUMMARY SIDEBAR (legacy — order.html
+   include actually uses .cart-summary from cart.css)
 ============================================================ */
 .checkout-summary {
-  background: #fff;
+  background: var(--clr-white);
   border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--r-md);
   padding: 28px 24px;
   box-shadow: var(--shadow-sm);
   position: sticky;
-  top: 90px;
+  top: calc(var(--navbar-h) + 16px);
 }
 .checkout-summary__title {
   font-family: var(--ff-display);
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--clr-dark);
+  color: var(--clr-text);
   margin-bottom: 20px;
 }
 
-/* Mini item list */
 .checkout-summary__items {
   display: flex;
   flex-direction: column;
@@ -479,7 +338,7 @@ button { font-family: inherit; }
   width: 48px;
   height: 48px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
   flex-shrink: 0;
 }
 .summary-item__info {
@@ -491,30 +350,28 @@ button { font-family: inherit; }
 .summary-item__name {
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--clr-dark);
+  color: var(--clr-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .summary-item__qty {
   font-size: 0.75rem;
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
 }
 .summary-item__price {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--clr-dark);
+  color: var(--clr-text);
   white-space: nowrap;
 }
 
-/* Divider */
 .checkout-summary__divider {
   border: none;
   border-top: 1px solid var(--clr-border);
   margin-block: 18px;
 }
 
-/* Breakdown rows */
 .checkout-summary__breakdown {
   display: flex;
   flex-direction: column;
@@ -526,12 +383,11 @@ button { font-family: inherit; }
   align-items: center;
   font-size: 0.9rem;
 }
-.checkout-summary__label { color: var(--clr-muted); }
-.checkout-summary__value { font-weight: 500; color: var(--clr-dark); }
-.checkout-summary__value--free { color: var(--clr-success); font-weight: 600; }
-.checkout-summary__row--discount .checkout-summary__value { color: var(--clr-success); }
+.checkout-summary__label { color: var(--clr-text-muted); }
+.checkout-summary__value { font-weight: 500; color: var(--clr-text); }
+.checkout-summary__value--free { color: #2E7D32; font-weight: 600; }
+.checkout-summary__row--discount .checkout-summary__value { color: #2E7D32; }
 
-/* Total row */
 .checkout-summary__total-row {
   display: flex;
   justify-content: space-between;
@@ -541,7 +397,7 @@ button { font-family: inherit; }
 .checkout-summary__total-label {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--clr-dark);
+  color: var(--clr-text);
 }
 .checkout-summary__total-value {
   font-family: var(--ff-display);
@@ -550,47 +406,15 @@ button { font-family: inherit; }
   color: var(--clr-crimson);
 }
 
-/* Place order button */
 .checkout-summary__place-order-btn {
   font-size: 1rem;
   padding: 14px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
   margin-bottom: 14px;
 }
 
 .checkout-summary__secure-note {
   text-align: center;
   font-size: 0.75rem;
-  color: var(--clr-muted);
+  color: var(--clr-text-muted);
 }
-
-
-/* ============================================================
-   FOOTER (minimal — matches Cart page)
-============================================================ */
-.site-footer-mini {
-  background: var(--clr-dark);
-  padding-block: 18px;
-  margin-top: auto;
-}
-.site-footer-mini__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.site-footer-mini__copy {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.5);
-}
-.site-footer-mini nav {
-  display: flex;
-  gap: 20px;
-}
-.site-footer-mini nav a {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.45);
-  transition: color var(--transition);
-}
-.site-footer-mini nav a:hover { color: var(--clr-gold-lt); }

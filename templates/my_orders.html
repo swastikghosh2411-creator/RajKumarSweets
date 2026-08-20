@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Orders — Rajkumar Sweets
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<main id="main-content">
+
+  <section class="orders" aria-labelledby="orders-heading">
+    <div class="orders__inner container">
+
+      <!-- Section Header -->
+      <header class="section-header">
+        <span class="section-header__kicker">Order History</span>
+        <h1 class="section-header__heading" id="orders-heading">My Orders</h1>
+        <p class="section-header__subtext">
+          Track every order you've placed with us, from confirmation to delivery.
+        </p>
+      </header>
+      <!-- END: Section Header -->
+
+      {% if orders %}
+        <div class="orders__list">
+          {% for order in orders %}
+            <article class="order-card">
+
+              <!-- Order Header -->
+              <div class="order-card__header">
+                <div class="order-card__id-block">
+                  <span class="order-card__label">Order</span>
+                  <span class="order-card__id">#{{ order.order_uuid|stringformat:"s"|slice:":8"|upper }}</span>
+                </div>
+
+                <div class="order-card__date-block">
+                  <span class="order-card__label">Placed on</span>
+                  <span class="order-card__date">{{ order.created_at|date:"d M Y, h:i A" }}</span>
+                </div>
+
+                <span class="order-status order-status--{{ order.status }}">
+                  {{ order.get_status_display }}
+                </span>
+              </div>
+              <!-- END: Order Header -->
+
+              <!-- Order Items -->
+              <div class="order-card__items">
+                {% for item in order.items.all %}
+                  <div class="order-item">
+                    <span class="order-item__qty">{{ item.quantity }}×</span>
+                    <span class="order-item__name">{{ item.product_name }}</span>
+                    <span class="order-item__subtotal">₹{{ item.subtotal }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+              <!-- END: Order Items -->
+
+              <!-- Order Footer -->
+              <div class="order-card__footer">
+                <div class="order-card__meta">
+                  <span class="order-card__payment">
+                    {{ order.get_payment_method_display }}
+                    {% if order.is_paid %}
+                      <span class="order-card__paid-badge">Paid</span>
+                    {% else %}
+                      <span class="order-card__unpaid-badge">Unpaid</span>
+                    {% endif %}
+                  </span>
+                </div>
+
+                <div class="order-card__total">
+                  <span class="order-card__total-label">Total</span>
+                  <span class="order-card__total-amount">₹{{ order.total_price }}</span>
+                </div>
+              </div>
+              <!-- END: Order Footer -->
+
+            </article>
+          {% endfor %}
+        </div>
+
+      {% else %}
+        <div class="orders__empty">
+          <span class="orders__empty-icon" aria-hidden="true">🛍️</span>
+          <h2 class="orders__empty-heading">No orders yet</h2>
+          <p class="orders__empty-text">
+            Looks like you haven't placed an order with us. Explore our sweets and treat yourself!
+          </p>
+          <a href="{% url 'home' %}#products" class="btn btn--crimson btn--lg">
+            Browse Sweets
+          </a>
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+
+</main>
+{% endblock %}

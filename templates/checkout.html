@@ -1,379 +1,203 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout – Rajkumar Sweets</title>
+{% block title %}
+Checkout – Rajkumar Sweets
+{% endblock %}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
-</head>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
 
-<body>
 
-  <header class="site-header" role="banner">
-    <div class="site-header__inner container">
-
-      <a href="{% url 'home' %}" class="site-header__brand" aria-label="Rajkumar Sweets – Home">
-        <img src="{% static 'images/logo.png' %}" alt="Rajkumar Sweets logo" class="site-header__logo" width="56" height="56" />
-        <div class="site-header__brand-text">
-          <span class="site-header__name">Rajkumar Sweets</span>
-          <span class="site-header__tagline">Authentic Mithai · Since 1978</span>
-        </div>
-      </a>
-
-      <nav class="site-nav" aria-label="Primary navigation">
-        <ul class="site-nav__list" role="menubar">
-          <li role="none"><a href="{% url 'home' %}#home">Home</a></li>
-          <li role="none"><a href="{% url 'home' %}#products">Products</a></li>
-          <li role="none"><a href="{% url 'home' %}#about">About</a></li>
-          <li role="none"><a href="{% url 'home' %}#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-    </div>
-  </header>
- 
-  <div class="steps-bar">
-    <div class="container">
-      <ol class="steps">
-        <li class="steps__item steps__item--done">
-          <span class="steps__circle">1</span>
-          <span class="steps__label">Cart</span>
-        </li>
-        <li class="steps__item steps__item--active">
-          <span class="steps__circle">2</span>
-          <span class="steps__label">Checkout</span>
-        </li>
-        <li class="steps__item">
-          <span class="steps__circle">3</span>
-          <span class="steps__label">Confirmation</span>
-        </li>
-      </ol>
-    </div>
+{% block content %}
+<div class="steps-bar">
+  <div class="container">
+    <ol class="steps">
+      <li class="steps__item steps__item--done">
+        <span class="steps__circle">1</span>
+        <span class="steps__label">Cart</span>
+      </li>
+      <li class="steps__item steps__item--active">
+        <span class="steps__circle">2</span>
+        <span class="steps__label">Checkout</span>
+      </li>
+      <li class="steps__item">
+        <span class="steps__circle">3</span>
+        <span class="steps__label">Confirmation</span>
+      </li>
+    </ol>
   </div>
-  
-  <main class="checkout-page" id="main-content">
-    <div class="container">
+</div>
 
-      <h1 class="checkout-page__title">Checkout</h1>
+<main class="checkout-page" id="main-content">
+  <div class="container">
 
-      <div class="checkout-layout">
+    <h1 class="checkout-page__title">Checkout</h1>
 
+    <div class="checkout-layout">
+
+      <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
+        {% csrf_token %}
         <section class="checkout-forms" aria-label="Delivery and payment details">
 
-          <div class="checkout-card">
-            <h2 class="checkout-card__title">
-              <span class="checkout-card__number">1</span>
-              Contact Information
-            </h2>
+        <div class="checkout-card">
+          <h2 class="checkout-card__title">
+            <span class="checkout-card__number">1</span>
+            Contact Information
+          </h2>
 
-            <div class="form-grid">
-              <div class="form-field">
-                <label for="full-name" class="form-field__label">Full Name</label>
-                
-                <input type="text" id="full-name" name="full_name" class="form-field__input"
-                       placeholder="e.g. Priya Sharma" required />
-              </div>
-
-              <div class="form-field">
-                <label for="phone" class="form-field__label">Phone Number</label>
-               
-                <input type="tel" id="phone" name="phone" class="form-field__input"
-                       placeholder="e.g. 98765 43210" required />
-              </div>
-
-              <div class="form-field form-field--full">
-                <label for="email" class="form-field__label">Email Address</label>
-                
-                <input type="email" id="email" name="email" class="form-field__input"
-                       placeholder="e.g. priya@example.com" required />
-              </div>
-            </div>
-          </div>
-          
-          <div class="checkout-card">
-            <h2 class="checkout-card__title">
-              <span class="checkout-card__number">2</span>
-              Delivery Address
-            </h2>
-
-           
-            <div class="saved-addresses">
-              <label class="saved-address saved-address--selected">
-                <input type="radio" name="saved_address_id" checked />
-                <span class="saved-address__text">
-                  <strong>Home</strong> — 12 Park Street, Kolkata, WB 700016
-                </span>
-              </label>
-              <label class="saved-address">
-                <input type="radio" name="saved_address_id" />
-                <span class="saved-address__text">
-                  <strong>Office</strong> — 45 Salt Lake Sector V, Kolkata, WB 700091
-                </span>
-              </label>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="full-name" class="form-field__label">Full Name</label>
+              <input type="text" id="full-name" name="full_name" class="form-field__input"
+                     placeholder="e.g. Priya Sharma"
+                     value="{{ request.user.get_full_name|default:request.user.username }}" required />
             </div>
 
-            <button type="button" class="link-btn" id="add-new-address-toggle">
-              + Deliver to a new address
-            </button>
+            <div class="form-field">
+              <label for="phone" class="form-field__label">Phone Number</label>
+              <input type="tel" id="phone" name="phone" class="form-field__input"
+                     placeholder="e.g. 98765 43210" required />
+            </div>
 
-           
-            <div class="form-grid form-grid--new-address" id="new-address-fields">
-              <div class="form-field form-field--full">
-                <label for="address-line1" class="form-field__label">Address Line 1</label>
-                <input type="text" id="address-line1" name="new_address_line1" class="form-field__input"
-                       placeholder="House / Flat No., Street" />
-              </div>
-
-              <div class="form-field form-field--full">
-                <label for="address-line2" class="form-field__label">Address Line 2 (optional)</label>
-                <input type="text" id="address-line2" name="new_address_line2" class="form-field__input"
-                       placeholder="Landmark, Area" />
-              </div>
-
-              <div class="form-field">
-                <label for="city" class="form-field__label">City</label>
-                <input type="text" id="city" name="new_city" class="form-field__input" placeholder="Kolkata" />
-              </div>
-
-              <div class="form-field">
-                <label for="state" class="form-field__label">State</label>
-                
-                <input type="text" id="state" name="new_state" class="form-field__input" placeholder="West Bengal" />
-              </div>
-
-              <div class="form-field">
-                <label for="pincode" class="form-field__label">Pincode</label>
-                <input type="text" id="pincode" name="new_pincode" class="form-field__input"
-                       placeholder="700001" inputmode="numeric" />
-              </div>
-
-              <div class="form-field">
-                <label for="save-address" class="form-field__label form-field__label--checkbox">
-                  <input type="checkbox" id="save-address" name="save_this_address" />
-                  Save this address for next time
-                </label>
-              </div>
+            <div class="form-field form-field--full">
+              <label for="email" class="form-field__label">Email Address</label>
+              <input type="email" id="email" name="email" class="form-field__input"
+                     placeholder="e.g. priya@example.com"
+                     value="{{ request.user.email }}" required />
             </div>
           </div>
-         
-          <div class="checkout-card">
-            <h2 class="checkout-card__title">
-              <span class="checkout-card__number">3</span>
-              Delivery Slot
-            </h2>
+        </div>
 
-            <div class="form-grid">
-              <div class="form-field">
-                <label for="delivery-date" class="form-field__label">Preferred Date</label>
-                
-                <input type="date" id="delivery-date" name="delivery_date" class="form-field__input" required />
-              </div>
+        <div class="checkout-card">
+          <h2 class="checkout-card__title">
+            <span class="checkout-card__number">2</span>
+            Delivery Address
+          </h2>
 
-              <div class="form-field">
-                <label for="delivery-slot" class="form-field__label">Preferred Time Slot</label>
-                
-                <select id="delivery-slot" name="delivery_slot" class="form-field__input" required>
-                  <option value="">Select a time slot</option>
-                  <option value="morning">Morning (9 AM – 12 PM)</option>
-                  <option value="afternoon">Afternoon (12 PM – 4 PM)</option>
-                  <option value="evening">Evening (4 PM – 8 PM)</option>
-                </select>
-              </div>
+          <div class="form-grid">
+            <div class="form-field form-field--full">
+              <label for="address-line1" class="form-field__label">Address Line 1</label>
+              <input type="text" id="address-line1" name="new_address_line1" class="form-field__input"
+                     placeholder="House / Flat No., Street"
+                     value="{{ profile.address_line1 }}" required />
+            </div>
+
+            <div class="form-field form-field--full">
+              <label for="address-line2" class="form-field__label">Address Line 2 (optional)</label>
+              <input type="text" id="address-line2" name="new_address_line2" class="form-field__input"
+                     placeholder="Landmark, Area"
+                     value="{{ profile.address_line2 }}" />
+            </div>
+
+            <div class="form-field">
+              <label for="city" class="form-field__label">City</label>
+              <input type="text" id="city" name="new_city" class="form-field__input" placeholder="Kolkata"
+                     value="{{ profile.city }}" required />
+            </div>
+
+            <div class="form-field">
+              <label for="state" class="form-field__label">State</label>
+              <input type="text" id="state" name="new_state" class="form-field__input" placeholder="West Bengal"
+                     value="{{ profile.state }}" required />
+            </div>
+
+            <div class="form-field">
+              <label for="pincode" class="form-field__label">Pincode</label>
+              <input type="text" id="pincode" name="new_pincode" class="form-field__input"
+                     placeholder="700001" inputmode="numeric"
+                     value="{{ profile.pincode }}" required />
             </div>
           </div>
-          
-          <div class="checkout-card">
-            <h2 class="checkout-card__title">
-              <span class="checkout-card__number">4</span>
-              Payment Method
-            </h2>
+        </div>
 
-            
-            <div class="payment-options">
+        <div class="checkout-card">
+          <h2 class="checkout-card__title">
+            <span class="checkout-card__number">3</span>
+            Payment Method
+          </h2>
 
-              <label class="payment-option payment-option--selected">
-                <input type="radio" name="payment_method" value="upi" checked />
-                <span class="payment-option__icon">📱</span>
-                <span class="payment-option__text">
-                  <strong>UPI</strong>
-                  <small>Pay via Google Pay, PhonePe, Paytm</small>
-                </span>
-              </label>
+          <div class="payment-options">
 
-              <label class="payment-option">
-                <input type="radio" name="payment_method" value="card" />
-                <span class="payment-option__icon">💳</span>
-                <span class="payment-option__text">
-                  <strong>Credit / Debit Card</strong>
-                  <small>Visa, Mastercard, RuPay</small>
-                </span>
-              </label>
+            {% comment %}
+            Online payment methods — disabled until payment gateway integration is live.
+            Re-enable by removing these comment tags.
 
-              <label class="payment-option">
-                <input type="radio" name="payment_method" value="netbanking" />
-                <span class="payment-option__icon">🏦</span>
-                <span class="payment-option__text">
-                  <strong>Net Banking</strong>
-                  <small>All major banks supported</small>
-                </span>
-              </label>
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="upi" />
+              <span class="payment-option__icon">📱</span>
+              <span class="payment-option__text">
+                <strong>UPI</strong>
+                <small>Pay via Google Pay, PhonePe, Paytm</small>
+              </span>
+            </label>
 
-              <label class="payment-option">
-                <input type="radio" name="payment_method" value="cod" />
-                <span class="payment-option__icon">💵</span>
-                <span class="payment-option__text">
-                  <strong>Cash on Delivery</strong>
-                  <small>Pay when your order arrives</small>
-                </span>
-              </label>
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="card" />
+              <span class="payment-option__icon">💳</span>
+              <span class="payment-option__text">
+                <strong>Credit / Debit Card</strong>
+                <small>Visa, Mastercard, RuPay</small>
+              </span>
+            </label>
 
-            </div>
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="netbanking" />
+              <span class="payment-option__icon">🏦</span>
+              <span class="payment-option__text">
+                <strong>Net Banking</strong>
+                <small>All major banks supported</small>
+              </span>
+            </label>
+            {% endcomment %}
+
+            <label class="payment-option payment-option--selected">
+              <input type="radio" name="payment_method" value="cod" checked />
+              <span class="payment-option__icon">💵</span>
+              <span class="payment-option__text">
+                <strong>Cash on Delivery</strong>
+                <small>Pay when your order arrives</small>
+              </span>
+            </label>
+
           </div>
-         
-          <div class="checkout-card">
-            <h2 class="checkout-card__title">
-              <span class="checkout-card__number">5</span>
-              Order Note <span class="checkout-card__optional">(optional)</span>
-            </h2>
-            
-            <textarea id="order-note" name="order_note" class="form-field__input form-field__textarea"
-                      placeholder="e.g. Please ring the bell twice, less sugar in gulab jamun, etc."
-                      rows="3"></textarea>
-          </div>
-         
+        </div>
 
-        </section>
-       
-        <aside class="checkout-summary" aria-label="Order summary">
-          <h2 class="checkout-summary__title">Order Summary</h2>
+        <div class="checkout-card">
+          <h2 class="checkout-card__title">
+            <span class="checkout-card__number">4</span>
+            Order Note <span class="checkout-card__optional">(optional)</span>
+          </h2>
+          <textarea id="order-note" name="order_note" class="form-field__input form-field__textarea"
+                    placeholder="e.g. Please ring the bell twice, less sugar in gulab jamun, etc."
+                    rows="3"></textarea>
+        </div>
 
-         
-          <ul class="checkout-summary__items">
+      </section>
+      </form>
 
-          
-            <li class="summary-item">
-              <img src="../static/images/placeholder.jpg" alt="" class="summary-item__image" width="48" height="48" />
-              <div class="summary-item__info">
-               
-                <span class="summary-item__name">Product Name</span>
- 
-                <span class="summary-item__qty">x 1</span>
-              </div>
-       
-              <span class="summary-item__price">₹ —</span>
-            </li>
- 
+      {% include "includes/order.html" %}
 
-          </ul>
-
-          <div class="checkout-summary__divider"></div>
-
-          <ul class="checkout-summary__breakdown">
-            <li class="checkout-summary__row">
-              <span class="checkout-summary__label">Subtotal</span>
-
-              <span class="checkout-summary__value">₹ —</span>
-            </li>
-            <li class="checkout-summary__row">
-              <span class="checkout-summary__label">Delivery</span>
-
-              <span class="checkout-summary__value checkout-summary__value--free">Free</span>
-            </li>
-            <li class="checkout-summary__row">
-              <span class="checkout-summary__label">Taxes &amp; Charges</span>
-             
-              <span class="checkout-summary__value">₹ —</span>
-            </li>
-   
-            <li class="checkout-summary__row checkout-summary__row--discount">
-              <span class="checkout-summary__label">Coupon Discount</span>
-         
-              <span class="checkout-summary__value">−₹ —</span>
-            </li>
-   
-          </ul>
-
-          <div class="checkout-summary__divider"></div>
-
-          <div class="checkout-summary__total-row">
-            <span class="checkout-summary__total-label">Total to Pay</span>
-        
-            <span class="checkout-summary__total-value">₹ —</span>
-          </div>
-
-   
-          <button type="submit" class="btn btn--crimson btn--full checkout-summary__place-order-btn">
-            Place Order
-          </button>
-
-          <p class="checkout-summary__secure-note">
-            🔒 Your payment information is encrypted and secure.
-          </p>
-        </aside>
-
-
-      </div>
- 
     </div>
-  </main>
 
-  <footer class="site-footer-mini" role="contentinfo">
-    <div class="container site-footer-mini__inner">
-      <p class="site-footer-mini__copy">
-        &copy; <span id="footer-year"></span> Rajkumar Sweets. All rights reserved.
-      </p>
-      <nav aria-label="Footer policy links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-      </nav>
-    </div>
-  </footer>
+  </div>
+</main>
+{% endblock %}
 
 
-  <script>
-    document.getElementById('footer-year').textContent = new Date().getFullYear();
-
- 
-    var toggleBtn = document.getElementById('add-new-address-toggle');
-    var newAddressFields = document.getElementById('new-address-fields');
-    if (toggleBtn && newAddressFields) {
-      newAddressFields.style.display = 'none';
-      toggleBtn.addEventListener('click', function () {
-        var isHidden = newAddressFields.style.display === 'none';
-        newAddressFields.style.display = isHidden ? 'grid' : 'none';
-        toggleBtn.textContent = isHidden ? '− Use a saved address instead' : '+ Deliver to a new address';
+{% block extra_js %}
+<script>
+  var paymentOptions = document.querySelectorAll('.payment-option');
+  paymentOptions.forEach(function (option) {
+    var radio = option.querySelector('input[type="radio"]');
+    radio.addEventListener('change', function () {
+      paymentOptions.forEach(function (opt) {
+        opt.classList.remove('payment-option--selected');
       });
-    }
-
-    var paymentOptions = document.querySelectorAll('.payment-option');
-    paymentOptions.forEach(function (option) {
-      var radio = option.querySelector('input[type="radio"]');
-      radio.addEventListener('change', function () {
-        paymentOptions.forEach(function (opt) {
-          opt.classList.remove('payment-option--selected');
-        });
-        option.classList.add('payment-option--selected');
-      });
+      option.classList.add('payment-option--selected');
     });
-
-    // ── Simple UI helper: highlight selected saved address ──
-    var savedAddresses = document.querySelectorAll('.saved-address');
-    savedAddresses.forEach(function (addr) {
-      var radio = addr.querySelector('input[type="radio"]');
-      radio.addEventListener('change', function () {
-        savedAddresses.forEach(function (a) {
-          a.classList.remove('saved-address--selected');
-        });
-        addr.classList.add('saved-address--selected');
-      });
-    });
-  </script>
-
-</body>
-</html>
+  });
+</script>
+{% endblock %}

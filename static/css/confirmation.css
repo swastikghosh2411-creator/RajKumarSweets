@@ -1,0 +1,228 @@
+/* ============================================================
+   confirmation.css — Rajkumar Sweets Order Confirmation Page
+   Page-specific only. Depends on base.css for variables, reset,
+   navbar, footer, and buttons. Depends on checkout.css for the
+   .steps-bar / .steps progress indicator (already loaded there).
+============================================================ */
+
+.confirmation-page {
+  padding-block: 48px 64px;
+}
+
+
+/* ============================================================
+   SUCCESS BANNER
+============================================================ */
+.confirmation-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-2);
+  max-width: 520px;
+  margin: 0 auto var(--sp-12);
+}
+
+.confirmation-success__icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: #E8F5E9;
+  color: #2E7D32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-3);
+  animation: confirmPop 0.5s var(--ease-out) both;
+}
+
+@keyframes confirmPop {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.confirmation-success__title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--clr-maroon);
+}
+
+.confirmation-success__subtitle {
+  font-size: var(--fs-base);
+  line-height: var(--lh-loose);
+  color: var(--clr-text-muted);
+}
+
+.confirmation-success__order-id {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+  margin-top: var(--sp-1);
+}
+
+.confirmation-success__order-id strong {
+  font-family: var(--ff-display);
+  font-size: var(--fs-lg);
+  color: var(--clr-crimson);
+}
+
+
+/* ============================================================
+   LAYOUT: items card + delivery info card
+============================================================ */
+.confirmation-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  align-items: start;
+  gap: var(--sp-8);
+  margin-bottom: var(--sp-10);
+}
+
+@media (max-width: 900px) {
+  .confirmation-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.confirmation-card {
+  background: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.confirmation-card__title {
+  font-family: var(--ff-display);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--clr-text);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+
+/* ============================================================
+   ORDER ITEMS LIST
+============================================================ */
+.confirmation-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.confirmation-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.confirmation-item__image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+}
+
+.confirmation-item__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.confirmation-item__name {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--clr-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.confirmation-item__qty {
+  font-size: var(--fs-xs);
+  color: var(--clr-text-muted);
+}
+
+.confirmation-item__price {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--clr-text);
+  white-space: nowrap;
+}
+
+.confirmation-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--clr-border);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--clr-text);
+}
+
+.confirmation-total-value {
+  font-family: var(--ff-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--clr-crimson);
+}
+
+
+/* ============================================================
+   DELIVERY / PAYMENT INFO
+============================================================ */
+.confirmation-info__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-block: var(--sp-3);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.confirmation-info__row:last-child {
+  border-bottom: none;
+}
+
+.confirmation-info__label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--clr-text-light);
+}
+
+.confirmation-info__value {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--clr-text);
+}
+
+
+/* ============================================================
+   ACTION BUTTONS
+============================================================ */
+.confirmation-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 479px) {
+  .confirmation-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .confirmation-actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
+}

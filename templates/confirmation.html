@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Order Confirmed – Rajkumar Sweets
+{% endblock %}
+
+{% block extra_css %}
+<!-- Reuses the steps-bar styles already defined in checkout.css -->
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'css/confirmation.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="steps-bar">
+  <div class="container">
+    <ol class="steps">
+      <li class="steps__item steps__item--done">
+        <span class="steps__circle">1</span>
+        <span class="steps__label">Cart</span>
+      </li>
+      <li class="steps__item steps__item--done">
+        <span class="steps__circle">2</span>
+        <span class="steps__label">Checkout</span>
+      </li>
+      <li class="steps__item steps__item--active">
+        <span class="steps__circle">3</span>
+        <span class="steps__label">Confirmation</span>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<main class="confirmation-page" id="main-content">
+  <div class="container">
+
+    <!-- Success banner -->
+    <section class="confirmation-success">
+      <div class="confirmation-success__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </div>
+
+      <h1 class="confirmation-success__title">Order Confirmed!</h1>
+      <p class="confirmation-success__subtitle">
+        Thank you{% if order.customer_name %}, {{ order.customer_name }}{% endif %}! Your sweets are
+        being prepared with care and will be on their way shortly.
+      </p>
+      <p class="confirmation-success__order-id">
+        Order&nbsp;#&nbsp;<strong>{{ order.order_uuid|stringformat:"s"|slice:":8"|upper }}</strong>
+      </p>
+    </section>
+
+    <div class="confirmation-layout">
+
+      <!-- LEFT: Items ordered -->
+      <section class="confirmation-card confirmation-order-items" aria-label="Items ordered">
+        <h2 class="confirmation-card__title">Order Items</h2>
+
+        <ul class="confirmation-items-list">
+          {% for item in cart_items %}
+            <li class="confirmation-item">
+              {% if item.product.image %}
+                <img
+                  src="{{ item.product.image.url }}"
+                  alt="{{ item.product.name }}"
+                  class="confirmation-item__image"
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                />
+              {% else %}
+                <img
+                  src="{% static 'images/placeholder.jpg' %}"
+                  alt="Product image"
+                  class="confirmation-item__image"
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                />
+              {% endif %}
+
+              <div class="confirmation-item__info">
+                <span class="confirmation-item__name">{{ item.product.name }}</span>
+                <span class="confirmation-item__qty">Qty: {{ item.quantity }}</span>
+              </div>
+
+              <span class="confirmation-item__price">₹{{ item.subtotal }}</span>
+            </li>
+          {% empty %}
+            <li class="confirmation-item">
+              <div class="confirmation-item__info">
+                <span class="confirmation-item__name">No items found for this order.</span>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div class="confirmation-total-row">
+          <span>Total Paid</span>
+          <span class="confirmation-total-value">₹{{ total_price|default:"0" }}</span>
+        </div>
+      </section>
+      <!-- END Items ordered -->
+
+
+      <!-- RIGHT: Delivery / payment info -->
+      <aside class="confirmation-card confirmation-info" aria-label="Delivery and payment details">
+        <h2 class="confirmation-card__title">Delivery Details</h2>
+
+        <div class="confirmation-info__row">
+          <span class="confirmation-info__label">Delivering To</span>
+          <span class="confirmation-info__value">
+            {{ order.delivery_address|default:"12 Park Street, Kolkata, WB 700016" }}
+          </span>
+        </div>
+
+        <div class="confirmation-info__row">
+          <span class="confirmation-info__label">Estimated Delivery</span>
+          <span class="confirmation-info__value">
+            {{ order.estimated_delivery|default:"Today, 6:00 PM – 8:00 PM" }}
+          </span>
+        </div>
+
+        <div class="confirmation-info__row">
+          <span class="confirmation-info__label">Payment Method</span>
+          <span class="confirmation-info__value">
+            {{ order.payment_method|default:"UPI" }}
+          </span>
+        </div>
+
+        <div class="confirmation-info__row">
+          <span class="confirmation-info__label">Order Date</span>
+          <span class="confirmation-info__value">
+            {{ order.created_at|date:"d M Y, h:i A"|default:"Just now" }}
+          </span>
+        </div>
+      </aside>
+      <!-- END Delivery / payment info -->
+
+    </div>
+
+    <div class="confirmation-actions">
+      <a href="{% url 'home' %}#products" class="btn btn--outline btn--lg">
+        Continue Shopping
+      </a>
+      <a href="{% url 'home' %}" class="btn btn--crimson btn--lg">
+        Back to Home
+      </a>
+    </div>
+
+  </div>
+</main>
+{% endblock %}

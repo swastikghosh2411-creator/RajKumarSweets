@@ -1,0 +1,149 @@
+<aside class="cart-summary" aria-label="Order summary">
+
+    <h2 class="cart-summary__title">Order Summary</h2>
+
+    <ul class="cart-summary__breakdown">
+
+        <li class="cart-summary__row">
+            <span class="cart-summary__label">
+                {{ cart_items|length }} item(s)
+            </span>
+
+            <span class="cart-summary__value">
+                ₹{{ total_price }}
+            </span>
+        </li>
+
+        <li class="cart-summary__row">
+            <span class="cart-summary__label">Delivery</span>
+
+            <span class="cart-summary__value cart-summary__value--free">
+                Free
+            </span>
+        </li>
+
+        <li class="cart-summary__row">
+            <span class="cart-summary__label">Taxes &amp; Charges</span>
+
+            <span class="cart-summary__value">
+                ₹0
+            </span>
+        </li>
+
+        {% if discount_amount %}
+            <li class="cart-summary__row">
+                <span class="cart-summary__label">
+                    Discount
+                    {% if coupon_code %}
+                        ({{ coupon_code }})
+                    {% endif %}
+                </span>
+
+                <span class="cart-summary__value">
+                    -₹{{ discount_amount }}
+                </span>
+            </li>
+        {% endif %}
+
+    </ul>
+
+    <div class="cart-summary__divider"></div>
+
+    <div class="cart-summary__total-row">
+        <span class="cart-summary__total-label">Total</span>
+
+        <span class="cart-summary__total-value">
+            ₹{{ final_total }}
+        </span>
+    </div>
+
+
+    <!-- Coupon -->
+    <div class="cart-summary__coupon">
+
+        <label
+            for="coupon-input"
+            class="cart-summary__coupon-label"
+        >
+            Have a coupon?
+        </label>
+
+        <form method="POST" action="{% url 'apply_coupon' %}">
+            {% csrf_token %}
+
+            <div class="cart-summary__coupon-row">
+
+                <input
+                    type="text"
+                    id="coupon-input"
+                    name="coupon_code"
+                    class="cart-summary__coupon-input"
+                    placeholder="Enter code"
+                    aria-label="Coupon code"
+                    value="{{ coupon_code|default:'' }}"
+                />
+
+                <button
+                    type="submit"
+                    class="btn btn--outline btn--sm cart-summary__coupon-btn"
+                >
+                    Apply
+                </button>
+
+            </div>
+        </form>
+
+        {% if coupon_code %}
+            <form
+                method="POST"
+                action="{% url 'remove_coupon' %}"
+            >
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="coupon-remove-btn"
+                >
+                    Remove coupon
+                </button>
+            </form>
+        {% endif %}
+
+    </div>
+
+
+    {% if is_checkout_page %}
+
+        <button
+            type="submit"
+            form="checkout-form"
+            class="btn btn--crimson btn--full cart-summary__checkout-btn"
+        >
+            Place Order
+        </button>
+
+    {% else %}
+
+        <a
+            href="{% url 'checkout' %}"
+            class="btn btn--crimson btn--full cart-summary__checkout-btn"
+        >
+            Proceed to Checkout
+        </a>
+
+    {% endif %}
+
+
+    {% comment %}
+    Accepted payment method pills — hidden while only COD is offered.
+    Re-enable once online payments are live.
+
+    <div class="cart-summary__payment-icons" aria-label="Accepted payment methods">
+        <span class="cart-summary__payment-pill">UPI</span>
+        <span class="cart-summary__payment-pill">Card</span>
+        <span class="cart-summary__payment-pill">Net Banking</span>
+        <span class="cart-summary__payment-pill">COD</span>
+    </div>
+    {% endcomment %}
+
+</aside>

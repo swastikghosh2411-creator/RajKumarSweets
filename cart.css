@@ -117,19 +117,6 @@
   margin-top: 4px;
 }
 
-.cart-item__stock {
-  font-size: 0.75rem;
-  color: var(--clr-text-muted);
-}
-
-.cart-item__stock-limit {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #C62828;
-  margin-top: 2px;
-}
-
 /* Quantity Controls */
 .cart-item__qty {
   display: flex;
