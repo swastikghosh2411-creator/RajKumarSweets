@@ -14,23 +14,30 @@ Sign Up – Rajkumar Sweets
 <!-- ── SIGNUP PAGE ── -->
 <main class="signup-page">
 
- <!-- Left: brand panel -->
-<div class="signup-panel">
-  <div class="signup-panel__content">
+  <!-- Left: brand panel -->
+  <div class="signup-panel">
+    <div class="signup-panel__content">
 
-    <span class="signup-panel__kicker">Join Our Family</span>
-   <h2 class="signup-panel__heading">Taste The<br /><em>Traditions of Generations</em></h2>
-    <figure class="signup-panel__image-wrapper">
-      <img
-        src="{% static 'images/signup.png' %}" 
-        alt="Rajkumar Sweets shop counter with freshly made mithai"
-        class="signup-panel__image"
-        loading="lazy"
-      />
-    </figure>
+      <span class="signup-panel__kicker">Join Our Family</span>
+      <h2 class="signup-panel__heading">Taste the<br /><em>Tradition of<br />Generations</em></h2>
+      <p class="signup-panel__text">
+        Join thousands of sweet lovers who trust Rajkumar Sweets for fresh,
+        authentic mithai delivered right to their door.
+      </p>
 
+      <blockquote class="signup-panel__quote">
+        <p>"Every piece of mithai reminds me of my grandmother's kitchen. Pure nostalgia in every bite."</p>
+        <footer>— Meena Sharma, loyal customer since 2008</footer>
+      </blockquote>
+
+      <ul class="signup-panel__perks">
+        <li>🥛 Pure dairy ingredients, no preservatives</li>
+        <li>🚚 Same-day delivery across Kolkata</li>
+        <li>🎁 Early access to festive hampers</li>
+      </ul>
+
+    </div>
   </div>
-</div>
 
   <!-- Right: form -->
   <div class="signup-form-wrap">
@@ -45,19 +52,41 @@ Sign Up – Rajkumar Sweets
         {% endfor %}
       {% endif %}
 
+      <!-- Non-field errors (e.g. general form errors not tied to one input) -->
+      {% if form.non_field_errors %}
+        <div class="signup-alert signup-alert--error">
+          {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <form method="POST" action="{% url 'signup' %}" class="signup-form" novalidate>
         {% csrf_token %}
 
-        <!-- Full Name -->
+        <!-- Username -->
         <div class="form-field">
-          <label for="full_name" class="form-field__label">Username</label>
+          <label for="username" class="form-field__label">Username</label>
           <div class="form-field__wrap">
             <svg class="form-field__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
             </svg>
-            <input type="text" id="full_name" name="username" class="form-field__input"
-                   placeholder="e.g. Priya Sharma" autocomplete="name" required maxlength="120" />
+            <input type="text" id="username" name="username" class="form-field__input"
+                   placeholder="e.g. priya_sharma98" autocomplete="username" required maxlength="150"
+                   pattern="[\w.@+\-]+"
+                   value="{{ request.POST.username|default:'' }}" />
           </div>
+          <span class="form-field__hint">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            Letters, digits, and @ . + - _ only — no spaces
+          </span>
+          {% if form.username.errors %}
+            <ul class="field-errorlist">
+              {% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
         </div>
 
         <!-- Email -->
@@ -69,8 +98,14 @@ Sign Up – Rajkumar Sweets
               <polyline points="22,6 12,13 2,6"/>
             </svg>
             <input type="email" id="email" name="email" class="form-field__input"
-                   placeholder="you@example.com" autocomplete="email" required maxlength="254" />
+                   placeholder="you@example.com" autocomplete="email" required maxlength="254"
+                   value="{{ request.POST.email|default:'' }}" />
           </div>
+          {% if form.email.errors %}
+            <ul class="field-errorlist">
+              {% for error in form.email.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
         </div>
 
         <!-- Phone -->
@@ -81,8 +116,14 @@ Sign Up – Rajkumar Sweets
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l1.16-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/>
             </svg>
             <input type="tel" id="phone" name="phone" class="form-field__input"
-                   placeholder="+91 98765 43210" autocomplete="tel" required maxlength="15" />
+                   placeholder="+91 98765 43210" autocomplete="tel" required maxlength="15"
+                   value="{{ request.POST.phone|default:'' }}" />
           </div>
+          {% if form.phone.errors %}
+            <ul class="field-errorlist">
+              {% for error in form.phone.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
         </div>
 
         <!-- Password -->
@@ -112,6 +153,12 @@ Sign Up – Rajkumar Sweets
             </div>
             <span class="pw-strength__label" id="pw-strength-label">Enter a password</span>
           </div>
+
+          {% if form.password1.errors %}
+            <ul class="field-errorlist">
+              {% for error in form.password1.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
         </div>
 
         <!-- Confirm Password -->
@@ -130,9 +177,23 @@ Sign Up – Rajkumar Sweets
             </button>
           </div>
           <span class="form-field__match" id="pw-match-msg"></span>
+
+          {% if form.password2.errors %}
+            <ul class="field-errorlist">
+              {% for error in form.password2.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
         </div>
 
-      
+        <!-- Terms -->
+        <div class="form-field form-field--checkbox">
+          <input type="checkbox" id="accept_terms" name="accept_terms" class="form-field__checkbox" required
+                 {% if request.POST.accept_terms %}checked{% endif %} />
+          <label for="accept_terms" class="form-field__check-label">
+            I agree to the <a href="#" class="signup-card__link">Terms</a> &amp;
+            <a href="#" class="signup-card__link">Privacy Policy</a>
+          </label>
+        </div>
 
         <!-- Submit -->
         <button type="submit" class="btn btn--crimson btn--full signup-submit">
@@ -142,7 +203,7 @@ Sign Up – Rajkumar Sweets
       </form>
 
       <p class="signup-card__footer">
-        &copy; 2025 Rajkumar Sweets · 
+        &copy; 2025 Rajkumar Sweets · Crafted with ❤ in Kolkata
       </p>
 
     </div>
