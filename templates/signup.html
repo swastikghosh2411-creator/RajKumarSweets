@@ -14,30 +14,23 @@ Sign Up – Rajkumar Sweets
 <!-- ── SIGNUP PAGE ── -->
 <main class="signup-page">
 
-  <!-- Left: brand panel -->
-  <div class="signup-panel">
-    <div class="signup-panel__content">
+ <!-- Left: brand panel -->
+<div class="signup-panel">
+  <div class="signup-panel__content">
 
-      <span class="signup-panel__kicker">Join Our Family</span>
-      <h2 class="signup-panel__heading">Taste the<br /><em>Tradition of<br />Generations</em></h2>
-      <p class="signup-panel__text">
-        Join thousands of sweet lovers who trust Rajkumar Sweets for fresh,
-        authentic mithai delivered right to their door.
-      </p>
+    <span class="signup-panel__kicker">Join Our Family</span>
+   <h2 class="signup-panel__heading">Taste The<br /><em>Traditions of Generations</em></h2>
+    <figure class="signup-panel__image-wrapper">
+      <img
+        src="{% static 'images/signup.png' %}" 
+        alt="Rajkumar Sweets shop counter with freshly made mithai"
+        class="signup-panel__image"
+        loading="lazy"
+      />
+    </figure>
 
-      <blockquote class="signup-panel__quote">
-        <p>"Every piece of mithai reminds me of my grandmother's kitchen. Pure nostalgia in every bite."</p>
-        <footer>— Meena Sharma, loyal customer since 2008</footer>
-      </blockquote>
-
-      <ul class="signup-panel__perks">
-        <li>🥛 Pure dairy ingredients, no preservatives</li>
-        <li>🚚 Same-day delivery across Kolkata</li>
-        <li>🎁 Early access to festive hampers</li>
-      </ul>
-
-    </div>
   </div>
+</div>
 
   <!-- Right: form -->
   <div class="signup-form-wrap">
@@ -57,7 +50,7 @@ Sign Up – Rajkumar Sweets
 
         <!-- Full Name -->
         <div class="form-field">
-          <label for="full_name" class="form-field__label">Full Name</label>
+          <label for="full_name" class="form-field__label">Username</label>
           <div class="form-field__wrap">
             <svg class="form-field__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -139,14 +132,7 @@ Sign Up – Rajkumar Sweets
           <span class="form-field__match" id="pw-match-msg"></span>
         </div>
 
-        <!-- Terms -->
-        <div class="form-field form-field--checkbox">
-          <input type="checkbox" id="accept_terms" name="accept_terms" class="form-field__checkbox" required />
-          <label for="accept_terms" class="form-field__check-label">
-            I agree to the <a href="#" class="signup-card__link">Terms</a> &amp;
-            <a href="#" class="signup-card__link">Privacy Policy</a>
-          </label>
-        </div>
+      
 
         <!-- Submit -->
         <button type="submit" class="btn btn--crimson btn--full signup-submit">
@@ -156,7 +142,7 @@ Sign Up – Rajkumar Sweets
       </form>
 
       <p class="signup-card__footer">
-        &copy; 2025 Rajkumar Sweets · Crafted with ❤ in Kolkata
+        &copy; 2025 Rajkumar Sweets · 
       </p>
 
     </div>
